@@ -1,0 +1,51 @@
+{template "header.html"}
+<div class="note note-danger">
+    <p>后台绑定域名可以提供后台的安全性，只能通过指定的域名访问后台，不会暴露在web中</p>
+</div>
+
+<div class="right-card-box">
+<table class="table table-striped table-bordered table-hover table-checkable dataTable">
+    <thead>
+    <tr>
+        <th width="55"> </th>
+        <th width="200"> {dr_lang('网站名称')} </th>
+        <th> {dr_lang('域名绑定新目录')} </th>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $list $t}
+    <tr>
+        <td>
+            <span class="badge badge-success"> {$t.id} </span>
+        </td>
+        <td>
+            <a href="{dr_http_prefix($t.domain)}" target="_blank">{$t.name}</a>
+        </td>
+        <td>
+            <div class="input-group">
+                <input type="text" name="data[{$t.id}]" id="dr_html_{$t.id}" value="{$data[$t.id]}" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn blue" onclick="dr_add_admin_dir('{$t.id}')" type="button"><i class="fa fa-code"></i> 生成文件 </button>
+                </span>
+            </div>
+            <div style="padding-top: 5px;">此目录是用于后台专用域名绑定的目录，绑定域名后请删除主站的后台入口文件：{SELF}</div>
+        </td>
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+</div>
+<script>
+
+    function dr_add_admin_dir(id) {
+        $.ajax({type: "GET",dataType:"json", url: admin_file+"?s=safe&c=adomain&m=add&id="+id+"&path="+encodeURIComponent($("#dr_html_"+id).val()),
+            success: function(json) {
+                dr_tips(json.code, json.msg);
+            },
+            error: function(HttpRequest, ajaxOptions, thrownError) {
+                dr_ajax_admin_alert_error(HttpRequest, ajaxOptions, thrownError)
+            }
+        });
+    }
+    </script>
+{template "footer.html"}

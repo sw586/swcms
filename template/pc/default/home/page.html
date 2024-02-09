@@ -1,0 +1,47 @@
+{template "header.html"}
+
+<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap mt-5">
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+            <a href="/" class="text-muted text-hover-primary">首页</a>
+        </li>
+        <!--end::Item-->
+        {dr_catpos($catid, '', true, '<li class="breadcrumb-item"><span class="bullet bg-gray-400 w-5px h-2px"></span></li><li class="breadcrumb-item text-muted">'.PHP_EOL.' <a href="[url]" class="text-muted text-hover-primary">[name]</a> '.PHP_EOL.' </li>'.PHP_EOL)}
+
+    </ul>
+    <!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
+
+<div class="card mt-5">
+    <!--begin::Body-->
+    <div class="card-body p-lg-17">
+        <!--begin::About-->
+        <div class="mb-18">
+            <!--begin::Wrapper-->
+            <div class="mb-10">
+                <!--begin::Top-->
+                <div class="text-center mb-15">
+                    <!--begin::Title-->
+                    <h5 class="fs-2hx text-dark mb-5">{$name}</h5>
+                    <!--end::Title-->
+                </div>
+                <!--end::Top-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::Description-->
+            <div class="neirong fs-5 fw-semibold text-gray-600">
+                <!--begin::Text-->
+                {$content}
+            </div>
+            <!--end::Description-->
+        </div>
+        <!--end::About-->
+    </div>
+    <!--end::Body-->
+</div>
+
+{template "footer.html"}

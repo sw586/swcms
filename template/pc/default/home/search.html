@@ -1,0 +1,213 @@
+{template "header.html"}
+
+<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap mt-5">
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+            <a href="/" class="text-muted text-hover-primary">首页</a>
+        </li>
+        <!--end::Item-->
+        {dr_catpos($catid, '', true, '<li class="breadcrumb-item"><span class="bullet bg-gray-400 w-5px h-2px"></span></li><li class="breadcrumb-item text-muted">'.PHP_EOL.' <a href="[url]" class="text-muted text-hover-primary">[name]</a> '.PHP_EOL.' </li>'.PHP_EOL)}
+
+        <!--begin::Item-->
+        <li class="breadcrumb-item">
+            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">搜索</li>
+        <!--end::Item-->
+    </ul>
+    <!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
+
+<div class="row g-5 g-xl-10 mb-5 mb-xl-10 mt-5">
+
+    <!--begin::Col-->
+    <div class="col-xl-8 mt-0">
+        <!--begin::Table widget 14-->
+        <div class="card card-flush h-md-100">
+
+            <!--begin::Body-->
+            <div class="card-body pt-6">
+
+
+                <div class="mb-10">
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack">
+                        <div class="d-flex align-items-center  w-100px">
+                            <span class="text-gray-800 text-hover-primary  fw-bold lh-0">栏目</span>
+                        </div>
+                        <div class="d-flex align-items-center w-100 ">
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if !$cat || $cat.child}badge-light-primary{/if}" href="{Router::search_url($params, 'catid', $parent.id)}">不限</a></label>
+                            <!--调用栏目分类，这种用法只能用于模块列表与搜索页面-->
+                            {loop $related $t}
+                            {if $t.tid==1}
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if $t.id==$cat.id}badge-light-primary{/if}" href="{Router::search_url($params, 'catid', $t.id)}">{$t.name}</a></label>
+                            {/if}
+                            {/loop}
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-3"></div>
+                    <!--end::Item-->
+
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack">
+                        <div class="d-flex align-items-center  w-100px">
+                            <span class="text-gray-800 text-hover-primary  fw-bold lh-0">关键词</span>
+                        </div>
+                        <div class="d-flex align-items-center w-100 ">
+                            <div class="d-flex align-items-center position-relative me-4">
+                                <span class="svg-icon svg-icon-3 position-absolute ms-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <input type="text"  onkeypress="if(event.keyCode==13) {dr_module_search('search_keyword');return false;}" name='keyword' value='{$keyword}' id='search_keyword' class="form-control form-control-sm   w-250px ps-10" placeholder="搜索关键词...">
+                            </div>
+                            <!--end::Search-->
+                            <a href="javascript:;" onclick="dr_module_search('search_keyword')" class="btn btn-primary btn-sm">搜索</a>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-3"></div>
+                    <script>
+                        // 这段js是用来执行搜索的
+                        function dr_module_search(name) {
+                            var url="{Router::search_url($params, 'keyword', 'dayrui')}";
+                            var value = $("#"+name).val();
+                            if (value) {
+                                location.href=url.replace('dayrui', value);
+                            } else {
+                                $("#"+name).focus()
+                                dr_tips(0, "输入关键字");
+                            }
+                            return false;
+                        }
+                    </script>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack">
+                        <div class="d-flex align-items-center  w-100px">
+                            <span class="text-gray-800 text-hover-primary  fw-bold lh-0">排序</span>
+                        </div>
+                        <div class="d-flex align-items-center w-100 ">
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if !$params.order || $params.order=='updatetime'}badge-light-primary{/if}" href="{Router::search_url($params, 'order', null)}">时间排序</a></label>
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if $params.order=='hits'}badge-light-primary{/if}" href="{Router::search_url($params, 'order', 'hits')}">点击排序</a></label>
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if $params.order=='comments'}badge-light-primary{/if}" href="{Router::search_url($params, 'order', 'comments')}">评论排序</a></label>
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if $params.order=='avgsort'}badge-light-primary{/if}" href="{Router::search_url($params, 'order', 'avgsort')}">评分排序</a></label>
+                            <label><a class="badge badge-light fw-bold mx-2 my-2 {if $params.order=='support'}badge-light-primary{/if}" href="{Router::search_url($params, 'order', 'support')}">支持量排序</a></label>
+
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-3"></div>
+                    <!--end::Item-->
+                </div>
+
+
+                    <!--调用MOD_DIR模块的数据 id和total和order参数(本页面固有参数) page=1标示开启分页 urlrule分页地址规则 pagesize每页数量-->
+                    {search module=MOD_DIR id=$searchid total=$sototal order=$params.order catid=$catid page=1 pagesize=12 urlrule=$urlrule}
+                    <!--begin::Col-->
+                    <div class=" d-flex align-items-center pt-5">
+                        <!--begin::Icon-->
+                        <div class="mobile-hidden d-flex h-120px w-120px h-lg-120px w-lg-120px flex-shrink-0 flex-center position-relative align-self-start align-self-lg-center mt-3 mt-lg-0">
+                            <div class="symbol symbol-90px symbol-2by3 me-4">
+                                <div class="symbol-label" style="background-image: url('{dr_thumb($t.thumb)}')"></div>
+                            </div>
+                        </div>
+                        <!--end::Icon-->
+
+                        <!--begin::Description-->
+                        <div class="ms-6">
+                            <h5 class="article-title">
+                                <a href="{$t.url}" class="text-dark">{$t.title}</a>
+                            </h5>
+                            <p class="list-unstyled text-gray-600 fw-semibold fs-6 p-0 m-0">
+                                {dr_strcut($t.description, 80)}
+                            </p>
+                            <div class="article-tag">
+                                {php $kws=dr_get_content_kws($t.keywords);}
+                                {if $kws}
+                                {php $kws=dr_arraycut($kws, 3);}
+                                {loop $kws $name $url}
+                                <a href="{$url}" class="badge badge-light-primary fw-bold my-2">{$name}</a>
+                                {/loop}
+                                {/if}
+
+                                <span class="text-muted   mx-2 fs-7"><i class="fa fa-calendar"></i> {$t.updatetime}</span>
+                                <span class="text-muted  mx-2  fs-7" itemprop="comments"><i class="fa fa-comments"></i> {intval($t.comments)} 评论</span>
+                                <span class="text-muted  mx-2  fs-7" itemprop="views" title="浏览次数"><i class="fa fa-eye"></i> {intval($t.hits)} 浏览</span>
+                            </div>
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Col-->
+                    {/search}
+
+                    <div class="row ">
+                        <div class="xrpagination mt-5">
+                            {$pages}
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <!--end: Card Body-->
+        </div>
+        <!--end::Table widget 14-->
+    </div>
+    <!--end::Col-->
+
+    <!--begin::Col-->
+    <div class="col-xl-4 mt-0">
+        <!--begin::Chart Widget 35-->
+        <div class="card card-flush h-md-100">
+            <!--begin::Header-->
+            <div class="card-header pt-5 ">
+                <!--begin::Title-->
+                <h3 class="card-title align-items-start flex-column">
+                    <!--begin::Statistics-->
+                    <div class="d-flex align-items-center mb-2">
+                        <!--begin::Currency-->
+                        <span class="fs-5 fw-bold text-gray-800 ">热门资讯</span>
+                        <!--end::Currency-->
+                    </div>
+                    <!--end::Statistics-->
+                </h3>
+                <!--end::Title-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-3">
+
+                {module catid=$catid order=hits num=10}
+                <!--begin::Item-->
+                <div class="d-flex flex-stack mb-7">
+                    <!--begin::Symbol-->
+                    <div class="symbol symbol-60px symbol-2by3 me-4">
+                        <div class="symbol-label" style="background-image: url('{dr_thumb($t.thumb)}')"></div>
+                    </div>
+                    <!--end::Symbol-->
+                    <!--begin::Title-->
+                    <div class="m-0">
+                        <a href="{$t.url}" class="text-dark fw-bold text-hover-primary fs-6">{dr_strcut($t.title, 15)}</a>
+                        <span class="text-gray-600 fw-semibold d-block pt-1 fs-7">{dr_strcut($t.description, 50)}</span>
+                    </div>
+                    <!--end::Title-->
+                </div>
+                {/module}
+
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Chart Widget 35-->
+    </div>
+    <!--end::Col-->
+</div>
+
+{template "footer.html"}

@@ -1,0 +1,6 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=","time":1707476713,"param":[],"action":"登录后台成功","username":"admin"}
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=admin271a0d3c2c2e.php%3Fc%3Dcloud%26m%3Ddown_file%26ls%3D13674%26cid%3D928","time":1707476743,"param":[],"action":"登录后台成功","username":"admin"}
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=admin271a0d3c2c2e.php%3Fc%3Dcloud%26m%3Ddown_file%26ls%3D13674%26cid%3D461","time":1707477165,"param":[],"action":"登录后台成功","username":"admin"}
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=admin271a0d3c2c2e.php%3Fc%3Dcloud%26m%3Ddown_file%26ls%3D13674%26cid%3D459","time":1707477198,"param":[],"action":"登录后台成功","username":"admin"}
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=admin271a0d3c2c2e.php%3Fc%3Dcloud%26m%3Ddown_file%26ls%3D13674%26cid%3D458","time":1707477225,"param":[],"action":"登录后台成功","username":"admin"}

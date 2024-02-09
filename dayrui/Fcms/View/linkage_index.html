@@ -1,0 +1,88 @@
+{template "header.html"}
+<div class="note note-danger">
+    <p>{dr_lang('联动菜单可以作为地区、行业、类型等，也可以按项目来设置联动菜单值')}</p>
+</div>
+
+<div class="right-card-box">
+<form class="form-horizontal" role="form" id="myform">
+    {dr_form_hidden()}
+    {if $ci->_is_admin_auth('del')}
+    <div class="bootstrap-table bootstrap-table2">
+        <div id="toolbar" class="toolbar">
+            <button type="button" onclick="dr_ajax_option('{dr_url('linkage/del')}', '{dr_lang('你确定要删除它们吗？')}', 1)" class="btn red btn-sm"> <i class="fa fa-trash"></i> {dr_lang('删除')}</button>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="table-scrollable table-clearfix">
+        {else}
+        <div class="table-scrollable">
+            {/if}
+        <table class="table table-noborder table-fc-upload table-striped table-bordered table-hover table-checkable dataTable">
+            <thead>
+            <tr class="heading">
+                {if $ci->_is_admin_auth('del')}
+                <th class="myselect">
+                    <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
+                        <span></span>
+                    </label>
+                </th>
+                {/if}
+                <th width="150"> {dr_lang('名称')} </th>
+                <th width="120"> {dr_lang('别名')} </th>
+                <th width="120"> {dr_lang('表名')} </th>
+                {if IS_SITES}
+                <th width="120" style="text-align:center"> {dr_lang('类型')} </th>{/if}
+                <th width="120" style="text-align:center"> {dr_lang('数据')} </th>
+                <th> {dr_lang('操作')} </th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $list $t}
+            <tr class="odd gradeX" id="dr_row_{$t.id}">
+                {if $ci->_is_admin_auth('del')}
+                <td class="myselect">
+                    <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="checkboxes" name="ids[]" value="{$t.id}" />
+                        <span></span>
+                    </label>
+                </td>
+                {/if}
+                <td>{$t.name}</td>
+                <td>{$t.code}</td>
+                <td>{php $tb='linkage_data_'.$t.id; echo $tb;}</td>
+                {if IS_SITES}
+                <td style="text-align:center">
+                    {if $t.type}
+                    <span class="label label-success"> {dr_lang('独立')} </span>
+                    {else}
+                    <span class="label label-danger"> {dr_lang('共享')} </span>
+                    {/if}
+                </td>
+                {/if}
+                <td style="text-align:center">
+                    {count action=table table=$tb}
+                </td>
+                <td style="overflow:visible">
+                    {if $ci->_is_admin_auth('edit')}<label><a href="javascript:dr_iframe('edit', '{dr_url('linkage/edit', ['id'=>$t.id])}', '500px','410px');" class="btn btn-xs green"> <i class="fa fa-edit"></i> {dr_lang('修改')} </a></label>{/if}
+                    <label><a href="{dr_url('linkage/list_index', ['key'=>$t.id])}" class="btn btn-xs dark"> <i class="fa fa-table"></i> {dr_lang('数据管理')} </a></label>
+                    <label><a href="javascript:dr_iframe_show('{dr_lang('一键生成')}', '{dr_url('linkage/cache_index', ['key'=>$t.id])}', '500px', '300px');" class="btn btn-xs yellow"> <i class="fa fa-refresh"></i> {dr_lang('一键生成')}</a></label>
+                    {if $ci->_is_admin_auth()}
+                    <label><a href="javascript:top.dr_iframe_show('{dr_lang('自定义字段')}','{dr_url('field/index', ['rname'=>'linkage', 'rid'=>$t.id])}&is_menu=1', '80%', '90%');" class="btn btn-xs blue"> <i class="fa fa-code"></i> {dr_lang('自定义字段')} </a></label>
+                    <label><a href="javascript:dr_iframe_show('{dr_lang('导出')}', '{dr_url('linkage/export', ['key'=>$t.id])}', '500px','280px');" class="btn btn-xs red"> <i class="fa fa-sign-out"></i> {dr_lang('导出')} </a></label>
+                    <label><a href="javascript:dr_iframe_show('{dr_lang('导入')}', '{dr_url('linkage/import', ['key'=>$t.id])}', '500px','280px');" class="btn btn-xs green"> <i class="fa fa-sign-in"></i> {dr_lang('导入')} </a></label>
+                    {/if}
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+
+
+</form>
+</div>
+
+{template "footer.html"}

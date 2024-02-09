@@ -1,0 +1,219 @@
+{template "header.html"}
+
+<script>
+
+    // 处理post提交
+    function dr_post_submit(url, form, time, go) {
+
+        var p = url.split('/');
+        if ((p[0] == 'http:' || p[0] == 'https:') && document.location.protocol != p[0]) {
+            alert('当前提交的URL是'+p[0]+'模式，请使用'+document.location.protocol+'模式访问再提交');
+            return;
+        }
+
+        url = url.replace(/&page=\d+&page/g, '&page');
+
+        $("#"+form+' .form-group').removeClass('has-error');
+        var cms_post_dofunc = "";
+        for(var i = 0; i < cms_post_addfunc.length; i++) {
+            var cms_post_dofunc = cms_post_addfunc[i];
+            var rst = cms_post_dofunc();
+            if (rst) {
+                dr_cmf_tips(0, rst);
+                return;
+            }
+        }
+        var loading = layer.load(2, {
+            shade: [0.3,'#fff'], //0.1透明度的白色背景
+            time: 100000000
+        });
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            data: $("#"+form).serialize(),
+            success: function(json) {
+                layer.close(loading);
+                // token 更新
+                if (json.token) {
+                    var token = json.token;
+                    $("#"+form+" input[name='"+token.name+"']").val(token.value);
+                }
+                if (json.code) {
+                    if (json.data.htmlfile) {
+                        // 执行生成htmljs
+                        $.ajax({
+                            type: "GET",
+                            url: json.data.htmlfile,
+                            dataType: "jsonp",
+                            success: function(json){ },
+                            error: function(){ }
+                        });
+                    }
+                    //
+                    {if $is_link_update}
+                    layer.confirm(
+                        '{dr_lang("需要更新栏目后才会生效，现在更新吗？")}',
+                        {
+                            icon: 3,
+                            shade: 0.3,
+                            closeBtn: 0,
+                            title: dr_lang('提示'),
+                            btn: [dr_lang('立即更新'), dr_lang('稍后更新')]
+                        }, function(index){
+                            layer.close(index);
+                            var width = '500px';
+                            var height = '300px';
+
+                            if (is_mobile_cms == 1) {
+                                width = '95%';
+                                height = '90%';
+                            }
+                            layer.open({
+                                type: 2,
+                                title: '{dr_lang('更新栏目')}',
+                                fix:true,
+                                scrollbar: false,
+                                shadeClose: true,
+                                shade: 0.3,
+                                area: [width, height],
+                                success: function(layero, index){
+                                    // 主要用于后台权限验证
+
+                                    dr_iframe_error(layer, index, 1);
+                                },end: function(){
+                                    setTimeout("window.location.href = '"+go+"'", 2000);
+                                    dr_cmf_tips(1, json.msg, json.data.time);
+                                },
+                                content: '{dr_url('module/api/update_category_repair')}&is_close=1&all=1&mid={$dir}&is_iframe=1'
+                        });
+                        }, function(){
+                            setTimeout("window.location.href = '"+go+"'", 2000);
+                            dr_cmf_tips(1, json.msg, json.data.time);
+                        }
+                    );
+                    {else}
+                    dr_link_ajax_url('{dr_url('module/api/update_category_repair')}&is_close=1&all=1&mid={$dir}', json, go);
+                    {/if}
+                        //
+                    } else {
+                        dr_cmf_tips(0, json.msg, json.data.time);
+                        if (json.data.field) {
+                            $('#dr_row_'+json.data.field).addClass('has-error');
+                            $('#dr_'+json.data.field).focus();
+                        }
+                    }
+                },
+                error: function(HttpRequest, ajaxOptions, thrownError) {
+                    dr_ajax_alert_error(HttpRequest, this, thrownError);
+                }
+            });
+    }
+
+        function dr_link_ajax_url(url, rt, go, index) {
+            if (index == undefined) {
+                var index = layer.msg("{dr_lang('正在自动更新栏目缓存，请等待...')}", {time: 999999999});
+            }
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url+"&is_ajax=1",
+                dataType: "json",
+                success: function (json) {
+                    if (json.code) {
+                        if (json.data) {
+                            dr_link_ajax_url(json.data, rt, go, index);
+                        } else {
+                            layer.close(index);
+                            if (go) {
+                                setTimeout("window.location.href = '"+go+"'", 2000);
+                            }
+                            dr_cmf_tips(1, rt.msg, rt.data.time);
+                        }
+                    } else {
+                        dr_cmf_tips(0, json.msg);
+                    }
+                },
+                error: function(HttpRequest, ajaxOptions, thrownError) {
+                    layer.close(index);
+                }
+            });
+        }
+</script>
+
+<div class="note note-danger">
+    <p> {template "category_btn.html"} </p>
+</div>
+
+<form action="" class="form-horizontal" method="post" name="myform" id="myform">
+    {$form}
+    <div class="portlet bordered light myfbody">
+        <div class="portlet-title tabbable-line">
+            <ul class="nav nav-tabs" style="float:left;">
+                <li class="{if $page==0}active{/if}">
+                    <a href="#tab_0" data-toggle="tab" onclick="$('#dr_page').val('0')"> {dr_lang('批量添加')} </a>
+                </li>
+            </ul>
+        </div>
+        <div class="portlet-body">
+            <div class="tab-content">
+
+                <div class="tab-pane {if $page==0}active{/if}" id="tab_0">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('所属栏目')}</label>
+                            <div class="col-md-9">
+                                <label>{$select}</label>
+                            </div>
+                        </div>
+                        {if $module.share}
+                        <div class="form-group r1">
+                            <label class="col-md-2 control-label">{dr_lang('栏目类型')}</label>
+                            <div class="col-md-9">
+                                <div class="mt-radio-inline">
+                                    <label class="mt-radio mt-radio-outline"><input type="radio" name="data[tid]" value="0" /> {dr_lang('单网页')} <span></span></label>
+                                    <label class="mt-radio mt-radio-outline"><input type="radio" name="data[tid]" value="1" /> {dr_lang('内容模块')} <span></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group dr_tid_1">
+                            <label class="col-md-2 control-label">{dr_lang('共享模块')}</label>
+                            <div class="col-md-9">
+                                <label>
+                                    <select class="form-control" name="data[mid]">
+                                        <option value=""> -- </option>
+                                        {loop $module_share $t}
+                                        {if $t.share}
+                                        <option value="{$t.dirname}" > {dr_lang($t.name)} </option>
+                                        {/if}
+                                        {/loop}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        {/if}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('批量录入')}</label>
+                            <div class="col-md-9">
+
+                                <textarea class="form-control " style="height:190px" name="data[list]"></textarea>
+                                <span class="help-block">{dr_lang('格式: 栏目名称|栏目目录 [回车换行]，如果不填写栏目目录时，会自动用拼音代替')}</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet-body form myfooter">
+        <div class="form-actions text-center">
+            <button type="button" onclick="dr_ajax_submit('{dr_now_url()}&page='+$('#dr_page').val(), 'myform', '2000')" class="btn blue"> <i class="fa fa-save"></i> {dr_lang('保存')}</button>
+        </div>
+    </div>
+</form>
+
+{template "footer.html"}

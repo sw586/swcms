@@ -1,0 +1,406 @@
+{template "header.html"}
+<script>
+    function dr_link_url(id, name) {
+        dr_iframe_cat('<i class="fa fa-edit"></i> '+name,'{dr_url(APP_DIR.'/category/link_edit')}&id='+id, '50%', '30%','nogo');
+    }
+    function dr_content_url(id, name) {
+        dr_iframe_cat('<i class="fa fa-edit"></i> '+name,'{dr_url(APP_DIR.'/category/edit')}&isedit=1&page=1&id='+id, '80%', '90%','nogo');
+    }
+    // 窗口提交
+    function dr_iframe_cat(type, url, width, height, rt) {
+
+        var title = type;
+
+        if (is_mobile_cms == 1) {
+            width = '95%';
+            height = '90%';
+        }
+
+        layer.open({
+            type: 2,
+            title: title,
+            fix:true,
+            scrollbar: false,
+            maxmin: false,
+            resize: true,
+            shadeClose: true,
+            shade: 0,
+            area: [width, height],
+            btn: [dr_lang('确定'), dr_lang('取消')],
+            yes: function(index, layero){
+                var body = layer.getChildFrame('body', index);
+                $(body).find('.form-group').removeClass('has-error');
+                // 延迟加载
+                var loading = layer.load(2, {
+                    shade: [0.3,'#fff'], //0.1透明度的白色背景
+                    time: 100000000
+                });
+                $.ajax({type: "POST",dataType:"json", url: url, data: $(body).find('#myform').serialize(),
+                    success: function(json) {
+                        layer.close(loading);
+                        // token 更新
+                        if (json.token) {
+                            var token = json.token;
+                            $(body).find("#myform input[name='"+token.name+"']").val(token.value);
+                        }
+                        if (json.code) {
+                            layer.close(index);
+                            if (json.data.htmlfile) {
+                                // 执行生成htmljs
+                                $.ajax({
+                                    type: "GET",
+                                    url: json.data.htmlfile,
+                                    dataType: "jsonp",
+                                    success: function(json){ },
+                                    error: function(){ }
+                                });
+                            }
+                            if (json.data.htmllist) {
+                                // 执行生成htmljs
+                                $.ajax({
+                                    type: "GET",
+                                    url: json.data.htmllist,
+                                    dataType: "jsonp",
+                                    success: function(json){ },
+                                    error: function(){ }
+                                });
+                            }
+                            // 一键更新
+                            {if $is_link_update}
+                            layer.confirm(
+                                '{dr_lang("需要更新栏目后才会生效，现在更新吗？")}',
+                                {
+                                    icon: 3,
+                                    shade: 0.3,
+                                    closeBtn: 0,
+                                    title: dr_lang('提示'),
+                                    btn: [dr_lang('立即更新'), dr_lang('稍后更新')]
+                                }, function(index){
+                                    layer.close(index);
+                                    var width = '500px';
+                                    var height = '300px';
+                                    layer.open({
+                                        type: 2,
+                                        title: '{dr_lang('更新栏目')}',
+                                        fix:true,
+                                        scrollbar: false,
+                                        shadeClose: true,
+                                        shade: 0.3,
+                                        area: [width, height],
+                                        success: function(layero, index){
+                                            // 主要用于后台权限验证
+
+                                            dr_iframe_error(layer, index, 1);
+                                        },end: function(){
+                                            dr_cmf_tips(1, json.msg, json.data.time);
+                                        },
+                                        content: '{dr_url('module/api/update_category_repair')}&is_close=1&all=1&mid={$dir}&is_iframe=1'
+                                    });
+                                }, function(){
+                                    dr_cmf_tips(1, json.msg, json.data.time);
+                                }
+                            );
+                            {else}
+                            dr_link_ajax_url('{dr_url('module/api/update_category_repair')}&is_close=1&all=1&mid={$dir}', json);
+                            {/if}
+                        } else {
+                            $(body).find('#dr_row_'+json.data.field).addClass('has-error');
+                            dr_cmf_tips(0, json.msg, json.data.time);
+                        }
+                        return false;
+                    },
+                    error: function(HttpRequest, ajaxOptions, thrownError) {
+                        dr_ajax_alert_error(HttpRequest, this, thrownError);
+                    }
+                });
+                return false;
+            },
+            success: function(layero, index){
+                // 主要用于后台权限验证
+
+                dr_iframe_error(layer, index, 1);
+            },
+            content: url+'&is_iframe=1'
+        });
+    }
+    function dr_cat_field(id, name) {
+        dr_iframe('<i class="fa fa-edit"></i> '+name,'{dr_url(APP_DIR.'/category/field_edit')}&id='+id, '50%', '70%', 'nogo');
+    }
+        function dr_link_ajax_url(url, rt, go, index) {
+            if (index == undefined) {
+                var index = layer.msg("{dr_lang('正在自动更新栏目缓存，请等待...')}", {time: 999999999});
+            }
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url+"&is_ajax=1",
+                dataType: "json",
+                success: function (json) {
+                    if (json.code) {
+                        if (json.data) {
+                            dr_link_ajax_url(json.data, rt, go, index);
+                        } else {
+                            layer.close(index);
+                            if (go) {
+                                setTimeout("window.location.href = '"+go+"'", 2000);
+                            }
+                            dr_cmf_tips(1, rt.msg, rt.data.time);
+                        }
+                    } else {
+                        dr_cmf_tips(0, json.msg);
+                    }
+                },
+                error: function(HttpRequest, ajaxOptions, thrownError) {
+                    layer.close(index);
+                }
+            });
+        }
+    // ajax关闭或启用
+    function dr_cat_ajax_open_close(e, url, fan) {
+        var index = layer.load(2, {
+            shade: [0.3,'#fff'], //0.1透明度的白色背景
+            time: 10000
+        });
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url,
+            dataType: "json",
+            success: function (json) {
+                layer.close(index);
+                if (json.code == 1) {
+                    if (json.data.share == 1) {
+                        if (json.data.value == fan) {
+                            $(e).attr('class', 'badge badge-no');
+                            $(e).html('<i class="fa fa-times"></i>');
+                        } else {
+                            $(e).attr('class', 'badge badge-yes');
+                            $(e).html('<i class="fa fa-check"></i>');
+                        }
+                    } else {
+                        // 独立模块 dr_is_page_html
+                        var obj = $('.dr_is_page_html');
+                        if (json.data.value == fan) {
+                            obj.attr('class', 'dr_is_page_html badge badge-no');
+                            obj.html('<i class="fa fa-times"></i>');
+                        } else {
+                            obj.attr('class', 'dr_is_page_html badge badge-yes');
+                            obj.html('<i class="fa fa-check"></i>');
+                        }
+                    }
+                    dr_tips(1, json.msg);
+                } else {
+                    dr_tips(0, json.msg);
+                }
+            },
+            error: function(HttpRequest, ajaxOptions, thrownError) {
+                dr_ajax_alert_error(HttpRequest, this, thrownError);;
+            }
+        });
+    }
+    function dr_cat_ajax_save(value, id) {
+        var url = "{dr_url($uriprefix.'/displayorder_edit')}&id="+id;
+        var index = layer.load(2, {
+            shade: [0.3,'#fff'], //0.1透明度的白色背景
+            time: 10000
+        });
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url+'&value='+value,
+            dataType: "json",
+            success: function (json) {
+                layer.close(index);
+                if (json.code == 1) {
+                    dr_tips(1, json.msg);
+                } else {
+                    dr_tips(0, json.msg);
+                }
+            },
+            error: function(HttpRequest, ajaxOptions, thrownError) {
+                dr_ajax_alert_error(HttpRequest, this, thrownError);;
+            }
+        });
+    }
+    // ajax关闭或启用
+    function dr_cat_ajax_show_open_close(e, url, fan) {
+        var index = layer.load(2, {
+            shade: [0.3,'#fff'], //0.1透明度的白色背景
+            time: 10000
+        });
+        var obj = $(e);
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url,
+            dataType: "json",
+            success: function (json) {
+                layer.close(index);
+                if (json.code == 1) {
+                    if (json.data.value == fan) {
+                        obj.attr('class', 'badge badge-no');
+                        obj.html('<i class="fa fa-times"></i>');
+                    } else {
+                        obj.attr('class', 'badge badge-yes');
+                        obj.html('<i class="fa fa-check"></i>');
+                    }
+                    dr_tips(1, json.msg);
+                } else {
+                    dr_tips(0, json.msg);
+                }
+            },
+            error: function(HttpRequest, ajaxOptions, thrownError) {
+                dr_ajax_alert_error(HttpRequest, this, thrownError);;
+            }
+        });
+    }
+    function dr_tree_data(catid) {
+        var index = layer.load(2, {
+            shade: [0.3,'#fff'], //0.1透明度的白色背景
+            time: 100000
+        });
+        var value = $(".select-cat-"+catid).html();
+        if (value == '[+]') {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{dr_url($uriprefix.'/list_index')}&pid="+catid,
+                success: function(json) {
+                    layer.close(index);
+                    if (json.code == 1) {
+                        {if $is_total}
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: "{dr_url('module/api/ctotal')}",
+                            data: {
+                                'cid': json.data,
+                                {csrf_token()}: "{csrf_hash()}",
+                            },
+                            success: function(json2) {
+                                if (json2.code == 1) {
+                                    eval(json2.msg);
+                                }
+                            },
+                            error: function(HttpRequest, ajaxOptions, thrownError) {
+                                dr_ajax_alert_error(HttpRequest, ajaxOptions, thrownError)
+                            }
+                        });
+                        {/if}
+                        $(".dr_catid_"+catid).after(json.msg);
+                        $(".select-cat-"+catid).html('[-]');
+                        $('.tooltips').tooltip();
+                    } else {
+                        dr_cmf_tips(json.code, json.msg);
+                    }
+                },
+                error: function(HttpRequest, ajaxOptions, thrownError) {
+                    dr_ajax_alert_error(HttpRequest, this, thrownError);
+                }
+            });
+        } else {
+            layer.close(index);
+            $(".dr_pid_"+catid).remove();
+            $(".select-cat-"+catid).html('[+]');
+        }
+    }
+    function dr_scjt() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{dr_url($uriprefix.'/scjt_edit')}",
+            data: $("#myform").serialize(),
+            success: function(json) {
+                if (json.code == 1) {
+                    dr_bfb('{dr_lang('生成栏目')}', '', json.msg);
+                } else {
+                    dr_cmf_tips(json.code, json.msg);
+                }
+
+            },
+            error: function(HttpRequest, ajaxOptions, thrownError) {
+                dr_ajax_alert_error(HttpRequest, this, thrownError);
+            }
+        });
+    }
+    $(function() {
+        {if defined('SYS_CAT_POPEN') && SYS_CAT_POPEN}
+        {loop $pcats $ii}
+        dr_tree_data({$ii});
+        {/loop}
+        {/if}
+
+            {if $is_total}
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{dr_url('module/api/ctotal')}",
+                data: {json_encode(['cid'=>$tcats, csrf_token() => csrf_hash()])},
+                success: function(json) {
+                    if (json.code == 1) {
+                        eval(json.msg);
+                    }
+                },
+                error: function(HttpRequest, ajaxOptions, thrownError) {
+                    dr_ajax_alert_error(HttpRequest, ajaxOptions, thrownError)
+                }
+            });
+            {/if}
+    });
+</script>
+<style>.dr_total{ font-size: 10px; color:#ccc} </style>
+<div class="note note-danger">
+    <p>
+        {template "category_btn.html"}
+    </p>
+</div>
+
+<div class="right-card-box">
+
+    <form class="form-horizontal" role="form" id="myform">
+        {dr_form_hidden()}
+        <div class="bootstrap-table bootstrap-table2">
+            <div id="toolbar" class="toolbar">
+
+                {if $ci->_is_admin_auth('del')}
+                <label><button type="button" onclick="dr_ajax_option('{dr_url($uriprefix.'/del')}', '{dr_lang('将同步删除其下级所有栏目和内容，且无法恢复，你确定要删除它们吗？')}', 1)" class="btn red btn-sm"> <i class="fa fa-trash"></i> {dr_lang('删除')}</button></label>
+                {/if}
+                {if $ci->_is_admin_auth('edit')}
+                <label style="margin-right: 5px">{$move_select}</label>
+                <label><button type="button" onclick="dr_ajax_option('{dr_url($uriprefix.'/move_edit')}', '{dr_lang('你确定要移动它们吗？')}', 1)" class="btn blue btn-sm"> <i class="fa fa-edit"></i> {dr_lang('移动')}</button></label>
+                {/if}
+                {if dr_is_app('chtml')}
+                <label><button type="button" onclick="dr_scjt()" class="btn green btn-sm"> <i class="fa fa-reorder"></i> {dr_lang('生成栏目静态')} </button></label>
+                {if IS_SHARE && $ci->_is_admin_auth('edit')}
+                <label><div class="btn-group dropdown">
+                    <a class="btn  blue btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false" href="javascript:;"> {dr_lang('批量静态')}
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;" onclick="dr_ajax_option('{dr_url($uriprefix.'/htmlall_edit')}', '{dr_lang('你确定要批量设置栏目为静态模式吗？')}', 1)" > {dr_lang('设置栏目静态')}</a></li>
+                        <li><a href="javascript:;" onclick="dr_ajax_option('{dr_url($uriprefix.'/phpall_edit')}', '{dr_lang('你确定要批量设置栏目为动态模式吗？')}', 1)" > {dr_lang('设置栏目动态')}</a></li>
+                        <li class="divider"> </li>
+                        <li><a href="javascript:;" onclick="dr_ajax_option('{dr_url($uriprefix.'/htmlall_edit', ['tid'=>1])}', '{dr_lang('你确定要批量设置内容为静态模式吗？')}', 1)" > {dr_lang('设置内容静态')}</a></li>
+                        <li><a href="javascript:;" onclick="dr_ajax_option('{dr_url($uriprefix.'/phpall_edit', ['tid'=>1])}', '{dr_lang('你确定要批量设置内容为动态模式吗？')}', 1)" > {dr_lang('设置内容动态')}</a></li>
+                    </ul>
+                </div></label>
+                {/if}
+                {/if}
+
+
+            </div>
+        </div>        <div class="clearfix"></div>
+        <div class="table-scrollable table-clearfix">
+            <table class="table table-noborder table-striped table-bordered table-hover table-checkable dataTable">
+                <thead>
+                {$cat_head}
+                </thead>
+                <tbody>
+                {$cat_list}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+{template "footer.html"}

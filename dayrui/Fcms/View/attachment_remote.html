@@ -1,0 +1,60 @@
+{template "header.html"}
+
+
+<div class="right-card-box">
+    {if $ci->_is_admin_auth('del')}
+    <div class="bootstrap-table2">
+        <div id="toolbar" class="toolbar">
+            <button type="button" onclick="dr_ajax_option('{dr_url('attachment/del')}', '{dr_lang('删除后，已关联的附件都会失效，确定要删除吗？')}', 1)" class="btn red btn-sm"> <i class="fa fa-trash"></i> {dr_lang('删除')}</button>
+        </div>
+    </div>
+    {/if}
+    <form class="form-horizontal" role="form" id="myform">
+        {dr_form_hidden()}
+        <div class="table-scrollable">
+            <table class="table table-noborder table-striped table-bordered table-hover table-checkable dataTable">
+                <thead>
+                <tr class="heading">
+                    {if $ci->_is_admin_auth('del')}
+                    <th class="myselect">
+                        <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
+                            <span></span>
+                        </label>
+                    </th>
+                    {/if}
+                    <th style="text-align:center" width="70" class="{dr_sorting('id')}" name="id">Id</th>
+                    <th style="text-align:center" class="{dr_sorting('type')}" name="type" width="100">{dr_lang('存储类型')}</th>
+                    <th class="{dr_sorting('name')}" name="name">{dr_lang('名称')}</th>
+                    <th>{dr_lang('操作')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $list $t}
+                <tr class="odd gradeX" id="dr_row_{$t.id}">
+                    {if $ci->_is_admin_auth('del')}
+                    <td class="myselect">
+                        <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="checkboxes" name="ids[]" value="{$t.id}" />
+                            <span></span>
+                        </label>
+                    </td>
+                    {/if}
+                    <td style="text-align:center">{$t.id}</td>
+                    <td style="text-align:center"> <span class="badge badge-{$color[$t['type']]}"> {$ci->type[$t['type']]['name']} </span></td>
+                    <td>{$t.name}</td>
+                    <td>
+                        {if $ci->_is_admin_auth('edit')}
+                        <label><a href="{dr_url('attachment/edit', ['id'=>$t.id])}" class="btn btn-xs green"> <i class="fa fa-edit"></i> {dr_lang('修改')}</a></label>
+                        {/if}
+                    </td>
+                </tr>
+                {/loop}
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+
+</div>
+{template "footer.html"}

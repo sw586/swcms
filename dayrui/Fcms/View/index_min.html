@@ -1,0 +1,156 @@
+{template "head.html"}
+
+<?php
+foreach ($my_menu as $tid => $left) {
+    $_link = 0; // 是否第一个链接菜单，0表示第一个
+    $left_string = '';
+    // 链接菜单开始
+    $link_string = '';
+    foreach ($left['link'] as $i => $link) {
+        $url = $link['url'];
+        if (!$_link) {
+        // 第一个链接菜单时 指定class
+        $class = 'nav-item active open';
+        $top['url'] = $url;
+        $top['link_id'] = $link['id'];
+        $top['left_id'] = $left['id'];
+        } else {
+        $class = 'nav-item';
+        }
+        $_link = 1; // 标识以后的菜单就不是第一个了
+        $link['icon'] = $link['icon'] ? $link['icon'] : 'fa fa-th-large';
+        $link_string .= '<li id="dr_menu_link_' . $link['id'] . '" class="' . $class . '"><a href="javascript:Mlink(' . $tid . ', ' . $left['id'] . ', ' . $link['id'] . ', \'' . $url . '\');"><i class="iconm ' . $link['icon'] . '"></i> <span class="title" title="' . dr_lang($top['name']) . ' - ' . dr_lang($left['name']) . ' - ' . dr_lang($link['name']) . '">' . dr_lang($link['name']) . '</span></a></li>';
+        }
+        $left_string .= '
+        <li id="dr_menu_left_' . $left['id'] . '" class="dr_menu_' . $tid . ' dr_menu_item nav-item ' . ($first != $tid ? '' : 'active open') . ' " >
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="' . $left['icon'] . '"></i>
+                <span class="title">' . dr_strcut(dr_lang($left['name']), 5) . '</span>
+                <span class="selected" style="' . ($first != $tid ? 'display:none' : '') . '"></span>
+                <span class="arrow ' . ($first != $tid ? '' : ' open') . '"></span>
+            </a>
+            <ul class="sub-menu">' . $link_string . '</ul>
+        </li>';
+        $string .= $left_string;
+}
+// 自定义后台菜单显示字符串
+if (function_exists('dr_my_admin_min_menu')) {
+$string = dr_my_admin_min_menu($my_menu, $string);
+}
+?>
+
+<body scroll="no" style="overflow: hidden;" class="page-sidebar-closed-hide-logo page-admin-min page-container-bg-solid page-header-fixed page-sidebar-fixed ">
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner ">
+        <div class="page-logo">
+            <a href="{SITE_URL}" target="_blank">
+                <img src="{THEME_PATH}assets/logo.png" class="logo-default" />
+            </a>
+        </div>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+
+        {if !$is_mobile}
+        <div class="page-top">
+            <div class="top-menu my-top-left pull-left">
+                <ul class="fc-all-menu-top  fc-mb-left-menu" id="dr_go_url">
+                </ul>
+            </div>
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+
+                    {if count($ci->site_info) > 1}
+                    <li class="dropdown dropdown-extended dropdown-tasks">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <i class="fa fa-share-alt"></i>
+                            <span class="badge badge-default"> {count($ci->site_info)} </span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks">
+                            <li>
+                                <ul class="dropdown-menu-list scroller" style="height:300px;" data-handle-color="#637283">
+                                    {loop $ci->site_info $i $t}
+                                    {if \Phpcmf\Service::M('auth')->_check_site($i)}
+                                    <li>
+                                        <a href="javascript:;" onclick="dr_select_site('{$i}')" title="{$t.SITE_NAME}" {if SITE_ID == $i}style="color:red"{/if}>
+                                        <span class="task">
+                                            <span class="desc"> {dr_strcut($t.SITE_NAME, 30)} </span>
+                                        </span>
+                                        </a>
+                                    </li>
+                                    {/if}
+                                    {/loop}
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    {/if}
+                    <li class="dropdown dropdown-user">
+                        <a  href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <span  class="username username-hide-on-mobile"> {dr_strcut($admin['username'], 8)} </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            {if IS_USE_MEMBER}<li><a href="{dr_url('api/alogin', ['id'=>$admin.uid])}" target="_blank"><i class="fa fa-user"></i> {dr_lang('用户中心')} </a></li>{/if}
+                            <li><a href="javascript:dr_go_url('{dr_url('api/my')}');"><i class="fa fa-edit"></i> {dr_lang('修改资料')} </a></li>
+                            {if !$is_mode}
+                            <li><a href="{dr_url('api/admin_all')}"><i class="fa fa-retweet"></i> {dr_lang('完整模式')}</a></li>
+                            {/if}
+                            <li><a href="javascript:;" onClick="dr_logout('{dr_url('login/out')}');"><i class="fa fa-user-times"></i> {dr_lang('退出系统')}</a></li>
+                            <li class="divider"> </li>
+                            {if $ci->_is_admin_auth('cache/index')}
+                            <li><a href="javascript:dr_go_url('{dr_url('cache/index')}');"><i class="fa fa-cogs"></i> {dr_lang('系统更新')}</a></li>
+                            {/if}
+                            {if $ci->_is_admin_auth('check/index')}
+                            <li><a href="javascript:dr_go_url('{dr_url('check/index')}');"><i class="fa fa-wrench"></i> {dr_lang('系统体检')}</a></li>
+                            {/if}
+                            <li><a href="javascript:dr_update_cache_all();"><i class="fa fa-refresh"></i> {dr_lang('更新缓存')}</a></li>
+                            <li><a href="javascript:dr_update_cache_data();"><i class="fa fa-trash"></i> {dr_lang('更新数据')}</a></li>
+                            {if $admin.adminid==1}
+                            <li class="divider"> </li>
+                            <li><a href="javascript:dr_go_url('{dr_url('error/index')}');"><i class="fa fa-shield"></i> {dr_lang('系统日志')}</a></li>
+                            {/if}
+                            {if $is_search_help}
+                            <li><a href="http://help.xunruicms.com" target="_blank"><i class="fa fa-book"></i> {dr_lang('帮助手册')}</a></li>
+                            {/if}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {/if}
+    </div>
+</div>
+<div class="clearfix"> </div>
+<div class="page-container">
+    <div class="page-sidebar-wrapper">
+        <div class="page-sidebar navbar-collapse collapse">
+
+            <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact">
+                {$string}
+                {if $is_mobile}
+                {if $ci->_is_admin_auth('cache/index')}
+                <li><a href="javascript:dr_go_url('{dr_url('cache/index')}', 'null');"><i class="fa fa-cogs"></i> {dr_lang('系统更新')}</a></li>
+                {/if}
+                <li><a href="javascript:dr_update_cache_all();"><i class="fa fa-refresh"></i> {dr_lang('更新缓存')}</a></li>
+                <li><a href="javascript:dr_update_cache_data();"><i class="fa fa-trash"></i> {dr_lang('更新数据')}</a></li>
+                <li><a href="{dr_url('api/alogin', ['id'=>$admin.uid])}" target="_blank"><i class="fa fa-user"></i> {dr_lang('用户中心')} </a></li>
+                {if !$is_mode}
+                <li><a href="{dr_url('api/admin_all')}"><i class="fa fa-retweet"></i> {dr_lang('完整模式')}</a></li>
+                {/if}
+                <li><a href="javascript:;" onClick="dr_logout('{dr_url('login/out')}');"><i class="fa fa-user-times"></i> {dr_lang('退出系统')}</a></li>
+                {/if}
+            </ul>
+
+        </div>
+    </div>
+    <div class="page-content-wrapper">
+        <div class="page-content page-content-min">
+            <div id="myiframe" cid="right_page">
+                <iframe class="myiframe" name="right" id="right_page" src="{$main_url}" url="{$main_url}" style="border:none; margin-bottom:0px;" width="100%" height="auto" allowtransparency="true"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

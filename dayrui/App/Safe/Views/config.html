@@ -1,0 +1,323 @@
+{template "header.html"}
+
+<div class="note note-danger">
+    <p><a href="javascript:dr_update_cache();">{dr_lang('更改数据之后需要更新缓存之后才能生效')}</a></p>
+</div>
+
+<form action="" class="form-horizontal" method="post" name="myform" id="myform">
+    {$form}
+    <div class="portlet bordered light myfbody">
+        <div class="portlet-title tabbable-line">
+            <ul class="nav nav-tabs" style="float:left;">
+                <li class="{if $page==0}active{/if}">
+                    <a href="#tab_0" data-toggle="tab" onclick="$('#dr_page').val('0')"> <i class="fa fa-expeditedssl"></i> {dr_lang('密码安全')} </a>
+                </li>
+                <li class="{if $page==5}active{/if}">
+                    <a href="#tab_5" data-toggle="tab" onclick="$('#dr_page').val('5')"> <i class="fa fa-lock"></i> {dr_lang('密码强度')} </a>
+                </li>
+                <li class="{if $page==2}active{/if}">
+                    <a href="#tab_2" data-toggle="tab" onclick="$('#dr_page').val('2')"> <i class="fa fa-user-md"></i> {dr_lang('登录安全')} </a>
+                </li>
+                <li class="{if $page==3}active{/if}">
+                    <a href="#tab_3" data-toggle="tab" onclick="$('#dr_page').val('3')"> <i class="fa fa-user"></i> {dr_lang('账户安全')} </a>
+                </li>
+                <li class="{if $page==4}active{/if}">
+                    <a href="#tab_4" data-toggle="tab" onclick="$('#dr_page').val('4')"> <i class="fa fa-cog"></i> {dr_lang('后台管理')} </a>
+                </li>
+            </ul>
+        </div>
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane {if $page==5}active{/if}" id="tab_5" style=": none">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('密码最小长度')}</label>
+                            <div class="col-md-9">
+                                <div class="input-small"><input class="form-control" id="dr_password" type="text" name="member[config][pwdlen]" value="{intval($member_config['config']['pwdlen'])}" >
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $("#dr_password").TouchSpin({
+                                                buttondown_class: "btn default",
+                                                buttonup_class: "btn default",
+                                                verticalbuttons: false,
+                                                step: 1,
+                                                min: 0,
+                                                max: 50
+                                            });
+                                        });
+                                    </script></div>
+                                <span class="help-block">{dr_lang('密码的最小长度控制，最大设置50位数')}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('允许账号与密码相同')}</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="member[config][user2pwd]" value="1" {if $member_config['config']['user2pwd']}checked{/if} data-on-text="{dr_lang('允许')}" data-off-text="{dr_lang('禁止')}" data-on-color="success" data-off-color="danger" class="make-switch" data-size="small">
+
+                                <span class="help-block">{dr_lang('针对注册或修改密码时的验证')}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('密码强度（正则）')}</label>
+                            <div class="col-md-9">
+                                <div class="input-group ">
+                                    <input class="form-control" type="text" name="member[config][pwdpreg]" value="{$member_config.config.pwdpreg}" >
+                                    <span class="input-group-btn">
+                                            <button class="btn blue" onclick="dr_iframe_show('{dr_lang('正则表达式')}', '{dr_url('api/test_pattern')}')" type="button">{dr_lang('测试')}</button>
+                                        </span>
+                                </div>
+                                <span class="help-block">{dr_lang('针对注册或修改密码时的强度验证，可以设置自定义正则表达式，例如数字正则表达式格式：/^[0-9]+$/')}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane {if !$page}active{/if}" id="tab_0">
+
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">应用范围</label>
+                            <div class="col-md-9">
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[pwd][use][]" {if dr_in_array('admin', $data['pwd']['use'])} checked{/if} value="admin"> 后台
+                                        <span></span>
+                                    </label>
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[pwd][use][]" {if dr_in_array('member', $data['pwd']['use'])} checked{/if} value="member"> 用户中心
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <span class="help-block">{dr_lang('选择以下配置适用的范围')}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('定期强制修改密码')}</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="data[pwd][is_edit]" value="1" {if $data['pwd']['is_edit']}checked{/if} data-on-text="{dr_lang('启用')}" data-off-text="{dr_lang('关闭')}" data-on-color="success" data-off-color="danger" class="make-switch" data-size="small">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('强制修改密码周期')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <input type="text" name="data[pwd][day_edit]" value="{$data['pwd']['day_edit']}" class="form-control">
+                                        <span class="input-group-addon">
+                                            天
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('首次强制修改密码')}</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="data[pwd][is_login_edit]" value="1" {if $data['pwd']['is_login_edit']}checked{/if} data-on-text="{dr_lang('启用')}" data-off-text="{dr_lang('关闭')}" data-on-color="success" data-off-color="danger" class="make-switch" data-size="small">
+
+                                <span class="help-block">{dr_lang('首次登录是否强制修改密码')}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('重置密码后强制修改密码')}</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="data[pwd][is_rlogin_edit]" value="1" {if $data['pwd']['is_rlogin_edit']}checked{/if} data-on-text="{dr_lang('启用')}" data-off-text="{dr_lang('关闭')}" data-on-color="success" data-off-color="danger" class="make-switch" data-size="small">
+
+                                <span class="help-block">{dr_lang('重置密码后，首次登录是否强制修改密码')}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+               </div>
+
+                <div class="tab-pane {if $page==2}active{/if}" id="tab_2" style=": none">
+
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">应用范围</label>
+                            <div class="col-md-9">
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[login][use][]" {if dr_in_array('admin', $data['login']['use'])} checked{/if} value="admin"> 后台
+                                        <span></span>
+                                    </label>
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[login][use][]" {if dr_in_array('member', $data['login']['use'])} checked{/if} value="member"> 用户中心
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <span class="help-block">{dr_lang('选择以下配置适用的范围')}</span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('长时间未操作自动退出')}</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="data[login][is_option]" value="1" {if $data['login']['is_option']}checked{/if} data-on-text="{dr_lang('启用')}" data-off-text="{dr_lang('关闭')}" data-on-color="success" data-off-color="danger" class="make-switch" data-size="small">
+
+                                <span class="help-block">{dr_lang('登录后长时间未操作自动退出账号')}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('自动退出周期')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <input type="text" name="data[login][exit_time]" value="{$data['login']['exit_time']}" class="form-control">
+                                        <span class="input-group-addon">
+                                            分钟
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('同一账号在异地进行登录')}</label>
+                            <div class="col-md-9">
+                                <div class="mt-radio-inline">
+                                    <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][city]" value="0" {if !$data['login']['city']}checked=""{/if}> 允许异地 <span></span></label>
+                                    <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][city]" value="1" {if $data['login']['city']}checked=""{/if}> 禁止异地 <span></span></label>
+                                </div>
+                                <span class="help-inline"> {dr_lang('通过IP判断登录，IP不一致时强制退出其他地区的账号')} </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('在其他设备进行同时登录')}</label>
+                            <div class="col-md-9">
+
+                                <div class="mt-radio-inline">
+                                <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][llq]" value="0" {if !$data['login']['llq']}checked=""{/if}> 允许其他设备 <span></span></label>
+                                <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][llq]" value="1" {if $data['login']['llq']}checked=""{/if}> 禁止其他设备 <span></span></label>
+                                </div>
+                                    <span class="help-inline"> {dr_lang('通过设备或浏览器判断登录，设备不一致时强制退出其他设备的账号')} </span>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="tab-pane {if $page==4}active{/if}" id="tab_4" style=": none">
+
+                    <div class="form-body">
+
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('管理员身份禁止前台登录')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][admin_not]" value="0" {if !$data['login']['admin_not']}checked=""{/if}> 不限制 <span></span></label>
+                                            <label class="mt-radio mt-radio-outline"><input type="radio" name="data[login][admin_not]" value="1" {if $data['login']['admin_not']}checked=""{/if}> 禁止登录前台 <span></span></label>
+                                        </div>
+                                        <span class="help-inline"> {dr_lang('不让管理员账号登录前台')} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('登录时密码错误校验周期')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <input type="text" name="system[SYS_ADMIN_LOGIN_TIME]" value="{$system['SYS_ADMIN_LOGIN_TIME']}" class="form-control">
+                                        <span class="input-group-addon">
+                                            分钟
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('登录时密码最大错误次数')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <input type="text" name="system[SYS_ADMIN_LOGINS]" value="{$system['SYS_ADMIN_LOGINS']}" class="form-control">
+                                        <span class="input-group-addon">
+                                            次
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="tab-pane {if $page==3}active{/if}" id="tab_3" style=": none">
+
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">应用范围</label>
+                            <div class="col-md-9">
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[safe][use][]" {if dr_in_array('admin', $data['safe']['use'])} checked{/if} value="admin"> 后台
+                                        <span></span>
+                                    </label>
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="data[safe][use][]" {if dr_in_array('member', $data['safe']['use'])} checked{/if} value="member"> 用户中心
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <span class="help-block">{dr_lang('选择以下配置适用的范围')}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{dr_lang('长期未登录锁定')}</label>
+                            <div class="col-md-9">
+                                <div class="input-inline input-medium">
+                                    <div class="input-group">
+                                        <input type="text" name="data[safe][wdl]" value="{$data['safe']['wdl']}" class="form-control">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="help-inline"> {dr_lang('单位天，0表示不限制，当N天没登录的情况下再次登录时先锁定账号')} </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet-body form myfooter">
+        <div class="form-actions text-center">
+            <button type="button" onclick="dr_ajax_submit('{dr_now_url()}&page='+$('#dr_page').val(), 'myform', '2000')" class="btn green"> <i class="fa fa-save"></i> {dr_lang('保存')}</button>
+        </div>
+    </div>
+</form>
+
+
+
+{template "footer.html"}

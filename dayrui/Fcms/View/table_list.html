@@ -1,0 +1,58 @@
+{template "header.html"}
+
+{if $is_time_where}
+{template "api_list_date_search.html", "admin"}
+{/if}
+
+{if $is_search}
+<div class="note note-danger" {if !isset($get.submit) && !$is_show_search_bar}style="display: none"{/if} id="table-search-tool">
+    <div class="row table-search-tool">
+        <form action="{SELF}" method="get">
+            {dr_form_search_hidden($extend_param)}
+            {if $extend_search}
+            {$extend_search}
+            {/if}
+            <div class="col-md-12 col-sm-12">
+                <label>
+                    <select name="field" class="form-control">
+                        <option value="id"> Id </option>
+                        {loop $field $t}
+                        <option value="{$t.fieldname}" {if $param.field==$t.fieldname}selected{/if}>{$t.name}</option>
+                        {/loop}
+                    </select>
+                </label>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <label><input type="text" class="form-control" placeholder="" value="{$param['keyword']}" name="keyword" /></label>
+            </div>
+            {if $is_time_where}
+            <div class="col-md-12 col-sm-12">
+                <label>
+                    <div class="input-group input-medium date-picker input-daterange" data-date="" data-date-format="yyyy-mm-dd">
+                        <input type="text" class="form-control" value="{$param.date_form}" name="date_form">
+                        <span class="input-group-addon"> {dr_lang('到')} </span>
+                        <input type="text" class="form-control" value="{$param.date_to}" name="date_to">
+                    </div>
+                </label>
+            </div>
+            {/if}
+            <div class="col-md-12 col-sm-12">
+                <label><button id="table-search-tool-submit" type="button" class="btn blue btn-sm " name="submit" > <i class="fa fa-search"></i> {dr_lang('搜索')}</button></label>
+                <label><button id="table-search-tool-reset" type="reset" class="btn red btn-sm " name="reset" > <i class="fa fa-refresh"></i> {dr_lang('重置')}</button></label>
+            </div>
+            {if $extend_end}
+            {$extend_end}
+            {/if}
+        </form>
+    </div>
+</div>
+{/if}
+
+<div class="right-card-box">
+    <div id="toolbar" class="toolbar">
+        {$mytable.foot_tpl}
+    </div>
+    {template "mytable.html", "admin"}
+</div>
+
+{template "footer.html"}

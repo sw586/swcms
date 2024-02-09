@@ -1,0 +1,25 @@
+
+<script>
+    function dr_update_category_0() {
+        dr_iframe_show('{dr_lang('一键更新栏目')}', '{dr_url('module/api/update_category_repair')}&all=1&mid={$dir}', '500px', '300px')
+    }
+    function dr_update_category_1() {
+        dr_iframe_show('{dr_lang('栏目自定义字段')}', '{dr_url('field/index')}&is_menu=1&rname=category-{$dir}', '80%', '90%')
+    }
+    function dr_update_category_2() {
+        dr_iframe_show('{dr_lang('栏目字段权限划分')}', '{dr_url(APP_DIR.'/category/field_add')}', '80%', '90%')
+    }
+</script>
+
+{if APP_DIR!='module'}
+<label><a class="btn btn-sm green" href="{dr_url(APP_DIR.'/category/config_add')}"> {dr_lang('栏目属性设置')} </a></label>
+{if $ci->_is_admin_auth()}
+<label><a class="btn btn-sm red"  onclick="dr_update_category_1()" href="javascript:;"> {dr_lang('栏目自定义字段')} </a></label>
+<label><a class="btn btn-sm yellow"  onclick="dr_update_category_2()" href="javascript:;"> {dr_lang('栏目字段权限')} </a></label>
+{/if}
+<label><a class="btn btn-sm green"  href="{dr_url(APP_DIR.'/category/table_add')}"> {dr_lang('内容独立分表储存')} </a></label>
+{if !APP_DIR && IS_XRDEV}
+<label><a class="btn btn-sm red"  href="{dr_url(APP_DIR.'/category/domain_add')}"> {dr_lang('栏目绑定域名')} </a></label>
+{/if}
+{/if}
+<label><a class="btn btn-sm blue" onclick="dr_update_category_0()" href="javascript:;"> {dr_lang('一键更新栏目')} </a></label>

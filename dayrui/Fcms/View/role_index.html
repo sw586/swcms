@@ -1,0 +1,86 @@
+{template "header.html"}
+
+
+<div class="right-card-box">
+<form class="form-horizontal" role="form" id="myform">
+    {dr_form_hidden()}
+
+    {if $ci->_is_admin_auth('del')}
+    <div class="bootstrap-table2">
+        <div id="toolbar" class="toolbar">
+            <button type="button" onclick="dr_ajax_option('{dr_url('role/del')}', '{dr_lang('你确定要删除它们吗？')}', 1)" class="btn red btn-sm"> <i class="fa fa-trash"></i> 删除</button>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="table-scrollable table-clearfix">
+        {else}
+        <div class="table-scrollable">
+            {/if}
+        <table class="table table-noborder table-striped table-bordered table-hover table-checkable dataTable">
+            <thead>
+            <tr class="heading">
+                {if $ci->_is_admin_auth('del')}
+                <th class="myselect">
+                <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                    <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
+                    <span></span>
+                </label>
+            </th>
+            {/if}
+            <th width="300"> {dr_lang('角色组')} </th>
+            <th width="100" style="text-align:center"> {dr_lang('身份')} </th>
+            {if IS_SITES}<th width="100" style="text-align:center"> {dr_lang('项目数')} </th>{/if}
+            <th>
+
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop $data $t}
+        <tr class="odd gradeX" id="dr_row_{$t.id}">
+            {if $ci->_is_admin_auth('del')}
+            <td class="myselect">
+                <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                    <input type="checkbox" {if $t.id==1}disabled{/if} class="checkboxes" name="ids[]" value="{$t.id}" />
+                    <span></span>
+                </label>
+            </td>
+            {/if}
+            <td>
+                {dr_lang($t.name)}
+            </td>
+            <td style="text-align:center">
+                <a {if $ci->_is_admin_auth('edit')}href="{if $t.id>1}javascript:dr_iframe('{dr_lang('修改')}', '{dr_url('role/edit', ['id'=>$t.id])}', '500px', '80%');{else}javascript:;{/if}"{/if} class="badge {if $t.application.tid}badge-danger{else}badge-success{/if}">{if $t.application.tid}{dr_lang('投稿者')}{else}{dr_lang('管理者')}{/if}</a>
+            </td>
+            {if IS_SITES}
+            <td style="text-align:center">
+                <a {if $ci->_is_admin_auth('edit')}href="{if $t.id>1}javascript:dr_iframe('{dr_lang('项目权限')}', '{dr_url('role/site_edit', ['id'=>$t.id])}', '500px', '50%');{else}javascript:;{/if}"{/if} class="badge badge-success">{if $t.id>1}{count($t.site)}{else}{dr_lang('全部')}{/if}</a>
+            </td>
+            {/if}
+            <td>
+                {if $ci->_is_admin_auth() && $t.id>1}
+                <a href="{dr_url('role/auth_edit', ['id'=>$t.id])}" class="btn btn-xs dark"> <i class="fa fa-user-md"></i> {dr_lang('操作权限')} </a>
+                {if IS_SITES}<a href="javascript:dr_iframe('{dr_lang('项目权限')}', '{dr_url('role/site_edit', ['id'=>$t.id])}', '500px', '80%', 'nogo');" class="btn btn-xs blue"> <i class="fa fa-cog"></i> {dr_lang('项目权限')}</a>{/if}
+                {if IS_USE_MEMBER && !$t.application.tid}<a href="javascript:dr_iframe('{dr_lang('审核权限')}', '{dr_url('role/verify_edit', ['id'=>$t.id])}', '500px', '80%', 'nogo');" class="btn btn-xs yellow"> <i class="fa fa-user"></i> {dr_lang('审核权限')}</a>{/if}
+                <a onclick="dr_iframe('{dr_lang('复制')}', '{dr_url('role/copy_edit', ['id'=>$t.id])}')" class="btn red btn-xs"> <i class="fa fa-copy"></i> {dr_lang('同步到其他角色')}</a>
+                {/if}
+                {if $ci->_is_admin_auth('edit')}<a href="javascript:dr_iframe('edit', '{dr_url('role/edit', ['id'=>$t.id])}', '500px', '60%');" class="btn btn-xs green"> <i class="fa fa-edit"></i> {dr_lang('修改')} </a>{/if}
+             </td>
+        </tr>
+        {/loop}
+        </tbody>
+    </table>
+    </div>
+    {if $mypages}
+         <div class="row fc-list-footer table-checkable ">
+             <div class="col-md-12 fc-list-page">
+                 {$mypages}
+             </div>
+         </div>
+    {/if}
+</form>
+</div>
+
+{template "footer.html"}

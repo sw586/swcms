@@ -1,0 +1,255 @@
+{template "header.html"}
+
+<div class="note note-danger">
+    <p>{dr_lang('更改系统配置之后需要重新生成一次缓存文件')}</p>
+</div>
+
+<div class="right-card-box">
+    <div class="table-scrollable">
+
+        <table class="table table-fc-upload table-striped table-bordered table-hover table-checkable dataTable">
+            <thead>
+            <tr class="heading">
+                <th width="55"> </th>
+                <th width="500"> {dr_lang('执行项目')} </th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            {php $key=0;}
+            {loop $list $id $t}
+            {php $key=$key+1;}
+            <tr>
+                <td>
+                    <span class="badge badge-success"> {$key} </span>
+                </td>
+                <td>
+                    {dr_lang($t[0])}
+                </td>
+                <td style="overflow:auto">
+                    <label>
+                        <a href="javascript:my_update_cache('{$id}', '{$t[1]}');" class="btn red btn-xs"><i class="fa fa-refresh"></i> {dr_lang('立即执行')} </a>
+                    </label>
+                    <label id="dr_{$id}_result" >
+
+                    </label>
+                </td>
+            </tr>
+            {/loop}
+            {php $key=$key+1;}
+            {if $module}
+            <tr>
+                <td>
+                    <span class="badge badge-success">{$key++}</span>
+                </td>
+                <td>
+                    {dr_lang('新增或变更栏目后，需要更新栏目缓存数据')}
+                </td>
+                <td style="overflow:auto">
+                    <label>
+                        <a href="javascript:dr_iframe_show('{dr_lang('更新共享栏目')}', '{dr_url('module/api/update_category_repair')}&all=1&mid=share', '500px', '300px');" class="btn blue btn-xs"><i class="fa fa-cog"></i> {dr_lang('共享栏目')} </a>
+                    </label>
+                    {loop $module $c}
+                    {if !$c.share}
+                    <label>
+                        <a href="javascript:dr_iframe_show('{dr_lang($c.name)}', '{dr_url('module/api/update_category_repair')}&all=1&mid={$c.dirname}', '500px', '300px');" class="btn blue btn-xs"><i class="{dr_icon($c.icon)}"></i> {dr_lang($c.name)} </a>
+                    </label>
+                    {/if}
+                    {/loop}
+                    {if $module_more}
+                    <div class="btn-group" style="margin-top:0; margin-left: 10px">
+                        <button type="button" class="btn btn-xs btn-default ">{dr_lang('更多')}</button>
+                        <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            {loop $module_more $c}
+                            {if !$c.share}
+                            <li>
+                                <a href="javascript:dr_iframe_show('{dr_lang($c.name)}', '{dr_url('module/api/update_category_repair')}&all=1&mid={$c.dirname}', '500px', '300px');"><i class="{dr_icon($c.icon)}"></i> {dr_lang($c.name)} </a>
+                            </li>
+                            {/if}
+                            {/loop}
+                        </ul>
+                    </div>
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="badge badge-success">{$key++}</span>
+                </td>
+                <td>
+                    {dr_lang('内容地址与设置地址不同步时，更新内容URL地址')}
+                </td>
+                <td style="overflow:auto">
+                    {loop $module $c}
+                    <label>
+                        <a href="javascript:dr_iframe_show('{dr_lang($c.name)}', '{dr_url('api/update_url')}&mid={$c.dirname}', '500px', '300px');" class="btn blue btn-xs"><i class="{dr_icon($c.icon)}"></i> {dr_lang($c.name)} </a>
+                    </label>
+                    {/loop}
+                    {if $module_more}
+                    <div class="btn-group" style="margin-top:0; margin-left: 10px">
+                        <button type="button" class="btn btn-xs btn-default ">{dr_lang('更多')}</button>
+                        <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            {loop $module_more $c}
+                            <li>
+                                <a href="javascript:dr_iframe_show('{dr_lang($c.name)}', '{dr_url('api/update_url')}&mid={$c.dirname}', '500px', '300px');"><i class="{dr_icon($c.icon)}"></i> {dr_lang($c.name)} </a>
+                            </li>
+                            {/loop}
+                        </ul>
+                    </div>
+                    {/if}
+                </td>
+            </tr>
+            {/if}
+            {table table=linkage return=c}
+            {/table}
+            {if $return_c}
+            <tr>
+                <td>
+                    <span class="badge badge-success">{$key++}</span>
+                </td>
+                <td>
+                    {dr_lang('变更联动菜单数据后，更新缓存数据')}
+                </td>
+                <td style="overflow:auto">
+                    {loop $return_c $c}
+                    <label>
+                        <a href="javascript:dr_iframe_show('{dr_lang($c.name)}', '{dr_url('linkage/cache_index')}&key={$c.id}', '500px', '300px');" class="btn blue btn-xs"> {dr_lang($c.name)} </a>
+                    </label>
+                    {/loop}
+                </td>
+            </tr>
+            {/if}
+            <tr>
+                <td>
+                    <span class="badge badge-success"> {$key++} </span>
+                </td>
+                <td style="color:blue">
+                    {dr_lang('在升级CMS版本或插件版本后，需要更新本脚本')}
+                </td>
+                <td style="overflow:auto">
+                    <label>
+                        <a href="javascript:dr_iframe_show('{dr_lang('升级程序脚本')}', '{dr_url('cache/update_index')}', '500px', '300px');" class="btn red btn-xs"><i class="fa fa-refresh"></i> {dr_lang('立即执行')} </a>
+                    </label>
+                    <label>
+                        <a href="javascript:dr_load_ajax('{dr_lang('确定初始化后台菜单吗？')}', '{dr_url('menu/init')}', 0);" class="btn blue btn-xs"><i class="fa fa-list"></i> {dr_lang('初始化后台菜单')} </a>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function my_update_cache(id, m) {
+        var obj = $('#dr_'+id+'_result');
+        obj.html("<img style='height:17px' src='{THEME_PATH}assets/images/loading-0.gif' />");
+
+        if (m == 'update_attachment') {
+            my_update_attachment(id, 0);
+        {if IS_SITES}
+        } else if (m == 'update_cache') {
+            my_update_site_cache(id, 0);
+        {/if}
+        } else if (m == 'update_site_config') {
+                my_update_site_config(id, 0);
+        } else {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{SELF}?c=api&m=cache&id="+m,
+                success: function (json) {
+                    if (json.code == 0) {
+                        obj.html('<font color="red">'+json.msg+'</font>');
+                    } else {
+                        obj.html('<font color="green">{dr_lang("执行完成")}</font>');
+                    }
+                },
+                error: function(HttpRequest, ajax, thrownError) {
+                    dr_ajax_alert_error(HttpRequest, ajax, thrownError);
+                    obj.html('<a href="javascript:dr_show_file_code(\'{dr_lang('查看日志')}\', \'{dr_url('error/log_show')}\');" style="color:red">{dr_lang("系统崩溃，请将错误日志发送给官方处理")}</a>');
+                }
+            });
+        }
+    }
+    function my_update_attachment(id, page) {
+        var obj = $('#dr_'+id+'_result');
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "{SELF}?c=api&m=cache&id=update_attachment&page="+page,
+            success: function (json) {
+                if (json.code == 0) {
+                    obj.html('<font color="red">'+json.msg+'</font>');
+
+                } else {
+                    if (json.data == 0) {
+                        obj.html('<font color="green">'+json.msg+'</font>');
+                    } else {
+                        my_update_attachment(id, json.data);
+                        obj.html('<font color="blue">'+json.msg+'</font>');
+                    }
+                }
+            },
+            error: function(HttpRequest, ajax, thrownError) {
+                dr_ajax_alert_error(HttpRequest, ajax, thrownError);
+                obj.html('<a href="javascript:dr_show_file_code(\'{dr_lang('查看日志')}\', \'{dr_url('error/log_show')}\');" style="color:red">{dr_lang("系统崩溃，请将错误日志发送给官方处理")}</a>');
+            }
+        });
+    }
+    function my_update_site_cache(id, page) {
+        var obj = $('#dr_'+id+'_result');
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "{SELF}?c=api&m=cache&id=update_site_cache&page="+page,
+            success: function (json) {
+                if (json.code == 0) {
+                    obj.html('<font color="red">'+json.msg+'</font>');
+                } else {
+                    if (json.data == 0) {
+                        obj.html('<font color="green">'+json.msg+'</font>');
+                    } else {
+                        my_update_site_cache(id, json.data);
+                        obj.html('<font color="blue">'+json.msg+'</font>');
+                    }
+                }
+            },
+            error: function(HttpRequest, ajax, thrownError) {
+                dr_ajax_alert_error(HttpRequest, ajax, thrownError);
+                obj.html('<a href="javascript:dr_show_file_code(\'{dr_lang('查看日志')}\', \'{dr_url('error/log_show')}\');" style="color:red">{dr_lang("系统崩溃，请将错误日志发送给官方处理")}</a>');
+            }
+        });
+    }
+    function my_update_site_config(id, page) {
+            var obj = $('#dr_'+id+'_result');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{SELF}?c=api&m=cache&id=update_site_config&page="+page,
+                success: function (json) {
+                    if (json.code == 0) {
+                        obj.html('<font color="red">'+json.msg+'</font>');
+                    } else {
+                        if (json.data == 0) {
+                            obj.html('<font color="green">'+json.msg+'</font>');
+                        } else {
+                            my_update_site_config(id, json.data);
+                            obj.html('<font color="blue">'+json.msg+'</font>');
+                        }
+                    }
+                },
+                error: function(HttpRequest, ajax, thrownError) {
+                    dr_ajax_alert_error(HttpRequest, ajax, thrownError);
+                    obj.html('<a href="javascript:dr_show_file_code(\'{dr_lang('查看日志')}\', \'{dr_url('error/log_show')}\');" style="color:red">{dr_lang("系统崩溃，请将错误日志发送给官方处理")}</a>');
+                }
+            });
+        }
+</script>
+{template "footer.html"}

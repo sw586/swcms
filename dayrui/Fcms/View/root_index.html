@@ -1,0 +1,147 @@
+{template "header.html"}
+
+<div class="note note-danger"  id="table-search-tool">
+    <div class="row table-search-tool">
+        <form action="{SELF}" method="get">
+            {dr_form_search_hidden()}
+            <div class="col-md-12 col-sm-12">
+                <label>
+                    <select name="rid" class="form-control">
+                        <option value=""> {dr_lang('全部')} </option>
+                        {loop $ci->role $t}
+                        <option value="{$t.id}" {if $p.rid==$t.id}selected{/if}>{$t.name}</option>
+                        {/loop}
+                    </select>
+                </label>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <label>
+                    {dr_lang('账号')}
+                </label>
+                <label><i class="fa fa-caret-right"></i></label>
+                <label><input type="text" class="form-control" placeholder="" value="{$p['keyword']}" name="keyword" /></label>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+                <label><button type="submit" class="btn blue btn-sm onloading" name="submit" > <i class="fa fa-search"></i> {dr_lang('搜索')}</button></label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="right-card-box">
+
+
+
+<form class="form-horizontal" role="form" id="myform">
+    {dr_form_hidden()}
+
+    {if $ci->_is_admin_auth('del')}
+    <div class="bootstrap-table2">
+        <div id="toolbar" class="toolbar">
+            <label><button type="button" onclick="dr_ajax_option('{dr_url($uriprefix.'/del')}', '{dr_lang('你确定要把它们的管理员身份取消吗？')}', 1)" class="btn red btn-sm"> <i class="fa fa-trash"></i> {dr_lang('删除')}</button>
+            </label>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="table-scrollable table-clearfix">
+        {else}
+        <div class="table-scrollable">
+            {/if}
+        <table class="table table-striped table-bordered table-hover table-checkable dataTable">
+            <thead>
+            <tr class="heading">
+                {if $ci->_is_admin_auth('del')}
+                <th class="myselect">
+                    <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
+                        <span></span>
+                    </label>
+                </th>
+                {/if}
+                <th width="60" style="text-align: center; ">{dr_lang('锁定')}</th>
+                <th width="200" class="{dr_sorting('username')}" name="username">{dr_lang('账号')}</th>
+                <th>{dr_lang('角色组')}</th>
+                <th>{dr_lang('操作')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $list $t}
+            {php $verify = dr_string2array($t.verify);}
+            <tr class="odd gradeX" id="dr_row_{$t.id}">
+                {if $ci->_is_admin_auth('del')}
+                <td class="myselect">
+                    <label class="mt-table mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="checkboxes" name="ids[]" value="{$t.id}" />
+                        <span></span>
+                    </label>
+                </td>
+                {/if}
+                <td style="text-align: center; ">
+                    {if \Phpcmf\Service::M()->table('member_data')->where('id', $t.uid)->where('is_lock=1')->counts()}
+                    <a href="javascript:;" onclick="dr_ajax_list_open_close(this, '{dr_url($uriprefix.'/status_edit', ['id'=>$t.uid])}');" value="1" class="badge badge-yes"><i class="fa fa-check"></i></a>
+                    {else}
+                    <a href="javascript:;" onclick="dr_ajax_list_open_close(this, '{dr_url($uriprefix.'/status_edit', ['id'=>$t.uid])}');" value="0" class="badge badge-no"><i class="fa fa-times"></i></a>
+                    {/if}
+
+                </td>
+                <td><a href="javascript:;" class="fc_member_show" member="{$t.username}">{$t.username}</a></td>
+                <td>
+                    {loop $t.role $c}
+                    <span class="badge badge-blue"> {dr_lang($c)} </span>
+                    {/loop}
+                </td>
+                <td>
+                    {if $ci->_is_admin_auth('edit')}
+                    <label><a href="{dr_url($uriprefix.'/edit', ['id'=>$t.id])}" class="btn btn-xs green"> <i class="fa fa-edit"></i> {dr_lang('修改')}</a></label>
+                    {/if}
+                    <label><a href="javascript:dr_iframe_show('{dr_lang('%s登录记录', $t.username)}', '{dr_url($uriprefix.'/login_index', ['id'=>$t.id])}', '80%')" class="btn btn-xs blue"> <i class="fa fa-calendar"></i> {dr_lang('登录记录')}</a></label>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+    {if $mypages}
+    <div class="row fc-list-footer table-checkable ">
+        <div class="col-md-12 fc-list-page">
+            {$mypages}
+        </div>
+    </div>
+    {/if}
+</form>
+</div>
+<script>
+    function dr_ajax_list_open_close(e, url) {
+    var obj = $(e);
+    var val = 0;
+    if (obj.attr("value") == 1) {
+        val = 0;
+    } else {
+        val = 1;
+    }
+    url+="&value="+val;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function (json) {
+            if (json.code == 1) {
+                if (val == 0) {
+                    obj.attr('class', 'badge badge-no');
+                    obj.html('<i class="fa fa-times"></i>');
+                } else {
+                    obj.attr('class', 'badge badge-yes');
+                    obj.html('<i class="fa fa-check"></i>');
+                }
+                obj.attr("value", val);
+            }
+            dr_tips(json.code, json.msg);
+        },
+        error: function(HttpRequest, ajaxOptions, thrownError) {
+            dr_ajax_admin_alert_error(HttpRequest, ajaxOptions, thrownError);
+        }
+    });
+}</script>
+{template "footer.html"}

@@ -1,0 +1,73 @@
+{template "header.html"}
+
+<form class="form-horizontal" role="form" id="myform">
+    {$form}
+    <div class="form-body">
+        <div class="form-group" id="dr_row_name">
+            <label class="col-xs-3 control-label ajax_name">{dr_lang('名称')}</label>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" id="dr_name" name="data[name]" value="{htmlspecialchars((string)$data.name)}">
+            </div>
+        </div>
+        {if $id > 1 && IS_USE_MODULE}
+        <div class="form-group">
+            <label class="col-xs-3 control-label ajax_name">{dr_lang('身份')}</label>
+            <div class="col-xs-8">
+                <div class="mt-radio-inline">
+                    <label class="mt-radio mt-radio-outline">
+                        <input onclick="$('.dr_tgz').hide()" type="radio" name="data[application][tid]" value="0" {if !$data['application']['tid']} checked{/if} > {dr_lang('管理者')}
+                        <span></span>
+                    </label>
+                    <label class="mt-radio mt-radio-outline">
+                        <input onclick="$('.dr_tgz').show()" type="radio" name="data[application][tid]" value="1" {if $data['application']['tid']} checked{/if}> {dr_lang('投稿者')}
+                        <span></span>
+                    </label>
+                </div>
+                <p class="help-block">{dr_lang('管理者：可管理全部用户的投稿内容')}</p>
+                <p class="help-block">{dr_lang('投稿者：只能管理自己的投稿内容')}</p>
+            </div>
+        </div>
+        <div class="form-group dr_tgz" style="{if !$data['application']['tid']} display:none{/if}">
+            <label class="col-xs-3 control-label ajax_name">{dr_lang('审核')}</label>
+            <div class="col-xs-8">
+                <label>
+                    <select name="data[application][verify]" class="form-control">
+                        <option value="0">{dr_lang('不审核')}</option>
+                        {if IS_USE_MEMBER}
+                        {table table=admin_verify}
+                        <option {if $data['application']['verify'] == $t.id} selected{/if} value="{$t.id}">{dr_lang($t.name)}</option>
+                        {empty}
+                        <option {if $data['application']['verify'] == 1} selected{/if} value="1">{dr_lang('启用审核')}</option>
+                        {/empty}
+                        {/if}
+                    </select>
+                </label>
+                <p class="help-block">{dr_lang('发布或修改模块内容时需要通过管理员审核')}</p>
+            </div>
+        </div>
+
+        {else}
+        <input type="hidden" name="data[application][tid]" value="0" />
+        {/if}
+        <div class="form-group">
+            <label class="col-xs-3 control-label ajax_name">{dr_lang('模式')}</label>
+            <div class="col-xs-8">
+                <div class="mt-radio-inline">
+                    <label class="mt-radio mt-radio-outline">
+                        <input type="radio" name="data[application][mode]" value="0" {if !$data['application']['mode']} checked{/if} > {dr_lang('允许使用简化模式')}
+                        <span></span>
+                    </label>
+                    {if $id != 1}
+                    <label class="mt-radio mt-radio-outline">
+                        <input type="radio" name="data[application][mode]" value="1" {if $data['application']['mode']} checked{/if}> {dr_lang('强制使用简化模式')}
+                        <span></span>
+                    </label>
+                    {/if}
+                </div>
+                <p class="help-block">{dr_lang('简化模式只具备部分可操作的功能，适用于非专业人士使用')}</p>
+            </div>
+        </div>
+
+    </div>
+</form>
+{template "footer.html"}
