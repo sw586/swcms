@@ -1,0 +1,2 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
+{"ip":"127.0.0.1","uid":0,"url":"http://dev.sw586.com/admin271a0d3c2c2e.php?c=login&go=","time":1707535289,"param":[],"action":"登录后台成功","username":"admin"}

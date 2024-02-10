@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="454f351e-ce96-4c16-83f4-4a659a39ed90" name="更改" comment="加入oci测试zzs">
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_index.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_couts.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_notice.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_main.html.cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/data/attachment.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/attachment.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/data/module-1-news.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/module-1-news.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/data/table-1.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/table-1.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/data/table-field.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/table-field.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/27/a9/27a9316e011c72237b3ce3b3ee4f272bf1c17271" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/3c/22/3c222fb1490f035f30271f8e4c03eab39352ad23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/48/84/4884cb863cf54ee814299cb2cca7e703beb39949" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/8e/5e/8e5e37382de9956d15f9ef5a9d5f47e07424fa5b" beforeDir="false" afterPath="$PROJECT_DIR$/cache/file/8e/5e/8e5e37382de9956d15f9ef5a9d5f47e07424fa5b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_add.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_remote.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_app.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_down_file.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_login_admin.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_online.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_system_index.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_cloud_index.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Oss_DS_Config.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qcloud_DS_Config.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qiniu_DS_Config.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_footer.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_header.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_show.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/App.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/Config.html" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/Config.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/autoload.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sw586"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="75f0e6e4-b3e5-47d0-9168-811912bdef74" />
+        <option name="url" value="https://github.com/sw586/swcms.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\phpstudy_pro\Extensions\php\php8.0.2nts\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2c7xC2tlJAjNlBH9GjwJ9i9ZhhR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/dev_root/Repos/Laravel-xrcms/dayrui/ThirdParty/Storage/Oci",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.general",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev_root\Repos\Laravel-xrcms\dayrui\ThirdParty\Storage\Oci" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Laravel-xrcms" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="454f351e-ce96-4c16-83f4-4a659a39ed90" name="更改" comment="" />
+      <created>1707476288007</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707476288007</updated>
+      <workItem from="1707476289486" duration="7019000" />
+      <workItem from="1707493130571" duration="1234000" />
+      <workItem from="1707532171517" duration="6074000" />
+    </task>
+    <task id="LOCAL-00001" summary="加入oci测试">
+      <option name="closed" value="true" />
+      <created>1707534968392</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707534968392</updated>
+    </task>
+    <task id="LOCAL-00002" summary="加入oci测试">
+      <option name="closed" value="true" />
+      <created>1707535795222</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707535795222</updated>
+    </task>
+    <task id="LOCAL-00003" summary="加入oci测试zz">
+      <option name="closed" value="true" />
+      <created>1707538162175</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707538162175</updated>
+    </task>
+    <task id="LOCAL-00004" summary="加入oci测试zzs">
+      <option name="closed" value="true" />
+      <created>1707538225579</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707538225579</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="加入oci测试8" />
+    <MESSAGE value="加入oci测试" />
+    <MESSAGE value="加入oci测试zz" />
+    <MESSAGE value="加入oci测试zzs" />
+    <option name="LAST_COMMIT_MESSAGE" value="加入oci测试zzs" />
+  </component>
+</project>
