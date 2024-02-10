@@ -5,35 +5,191 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454f351e-ce96-4c16-83f4-4a659a39ed90" name="更改" comment="加入oci测试zzs">
-      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_index.html.cache.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_couts.html.cache.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_notice.html.cache.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_main.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_add.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_remote.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_system_index.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Oci_DS_Config.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Oss_DS_Config.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qcloud_DS_Config.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qiniu_DS_Config.html.cache.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/AbstractClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/AuthProviderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/CachingRequestingAuthProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/FederationClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/InstancePrincipalsAuthProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/SecurityTokenAdapter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Auth/X509CertificateSuppliers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/ConfigFile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Constants.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/HttpUtils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Iterator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Logging/LogAdapterInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/OciException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/OciResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Range.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Regions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/SigningStrategy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/StringUtils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/UserAgent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Utils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/Common/Version.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/ObjectStorageAsyncClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/ObjectStorageClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/ObjectStorageHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/ObjectStorageIterators.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/AbstractHttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/AbstractStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/FileStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/GetObjectStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/HasFileHandle.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/HttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/ParHttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/PutObjectUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/StreamWrapper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/UploadManagerUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/UploaderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/StreamWrapper/WriteStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/AbstractMultipartUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/AbstractUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/BulkDeleteManager.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/MultipartStreamResumeUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/MultipartStreamUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/MultipartUploadException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/SinglePartUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/UploadManager.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/UploadManagerConstants.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Oracle/Oci/ObjectStorage/Transfer/UploadManagerRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/App.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/Config.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/autoload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/AbstractClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/AuthProviderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/CachingRequestingAuthProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/FederationClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/InstancePrincipalsAuthProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/SecurityTokenAdapter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Auth/X509CertificateSuppliers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/ConfigFile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Constants.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/HttpUtils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Iterator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Logging/LogAdapterInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/OciException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/OciResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Range.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Regions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/SigningStrategy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/StringUtils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/UserAgent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Utils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/Common/Version.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/ObjectStorageAsyncClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/ObjectStorageClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/ObjectStorageHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/ObjectStorageIterators.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/AbstractHttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/AbstractStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/FileStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/GetObjectStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/HasFileHandle.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/HttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/ParHttpStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/PutObjectUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/StreamWrapper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/UploadManagerUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/UploaderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/StreamWrapper/WriteStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/AbstractMultipartUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/AbstractUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/BulkDeleteManager.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/MultipartStreamResumeUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/MultipartStreamUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/MultipartUploadException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/SinglePartUploader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/UploadManager.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/UploadManagerConstants.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/新建文件夹/dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage/Transfer/UploadManagerRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cache/data/attachment.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/attachment.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cache/data/module-1-news.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/module-1-news.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/data/table-1.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/table-1.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cache/data/table-field.cache" beforeDir="false" afterPath="$PROJECT_DIR$/cache/data/table-field.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/file/27/a9/27a9316e011c72237b3ce3b3ee4f272bf1c17271" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/file/3c/22/3c222fb1490f035f30271f8e4c03eab39352ad23" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/file/48/84/4884cb863cf54ee814299cb2cca7e703beb39949" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/file/8e/5e/8e5e37382de9956d15f9ef5a9d5f47e07424fa5b" beforeDir="false" afterPath="$PROJECT_DIR$/cache/file/8e/5e/8e5e37382de9956d15f9ef5a9d5f47e07424fa5b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_add.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_attachment_remote.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_app.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_down_file.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_login_admin.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_cloud_online.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_system_index.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_cloud_index.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Oss_DS_Config.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qcloud_DS_Config.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_ThirdParty_DS_Storage_DS_Qiniu_DS_Config.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_footer.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_header.html.cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_template_DS_pc_DS_default_DS_home_DS_show.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/error/log-2024-02-10.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/error/log-2024-02-10.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/16/61/1661b1b2f364a914c483de50024cc9bb6ca5d0b2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/68/90/6890ab69b02cfb746827da7e8899709f8dc9a9e3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/file/8e/5e/8e5e37382de9956d15f9ef5a9d5f47e07424fa5b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/log/202402/10.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/log/202402/10.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/session/PuQpEG4wKKdHDaJGX3PqGq8LBlxL0VOdgKY2MCTZ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/session/QHszSxzYc8QdMw70xzt6k3UJydKdovO1py8Dzei9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/session/uXhGimHyZ7K3QdnfbM2ZOw3bAJ9aj8h9geROLtuF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_App_DS_Module_DS_Views_DS_share_list.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_App_DS_Module_DS_Views_DS_share_post.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_api_list_date_search.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_api_upload_data.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_api_upload_list.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_field_index.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_index.html.cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_index.html.cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_couts.html.cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_couts.html.cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_notice.html.cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_main_DS_notice.html.cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_Fcms_DS_View_DS_mytable.html.cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_main.html.cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/cache/template/D_DS_dev_root_DS_Repos_DS_Laravel-xrcms_DS_dayrui_DS_My_DS_View_DS_main.html.cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci.php" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/App.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/Config.html" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/Config.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/AbstractClient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/AuthProviderInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/CachingRequestingAuthProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/FederationClient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/InstancePrincipalsAuthProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/SecurityTokenAdapter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Auth/X509CertificateSuppliers.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/ConfigFile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Constants.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/HttpUtils.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Iterator.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Logging/LogAdapterInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/OciException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/OciResponse.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Range.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Regions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/SigningStrategy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/StringUtils.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/UserAgent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Utils.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/Common/Version.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/ObjectStorageAsyncClient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/ObjectStorageClient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/ObjectStorageHelper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/ObjectStorageIterators.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/AbstractHttpStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/AbstractStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/FileStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/GetObjectStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/HasFileHandle.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/HttpStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/ParHttpStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/PutObjectUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/StreamWrapper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/UploadManagerUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/UploaderInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/StreamWrapper/WriteStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/AbstractMultipartUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/AbstractUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/BulkDeleteManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/MultipartStreamResumeUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/MultipartStreamUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/MultipartUploadException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/SinglePartUploader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/UploadManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/UploadManagerConstants.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dayrui/ThirdParty/Storage/Oci/src/ObjectStorage/Transfer/UploadManagerRequest.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +289,7 @@
       <updated>1707476288007</updated>
       <workItem from="1707476289486" duration="7019000" />
       <workItem from="1707493130571" duration="1234000" />
-      <workItem from="1707532171517" duration="6074000" />
+      <workItem from="1707532171517" duration="24687000" />
     </task>
     <task id="LOCAL-00001" summary="加入oci测试">
       <option name="closed" value="true" />

@@ -1,0 +1,393 @@
+项目开发计划书
+项目github仓库是Xunruicms的蓝版：https://github.com/sw586/swcms/tree/9789a9b52f08a73fb3559fcff89bbe4f3f2d280b
+在项目中使用oci-php-sdk（https://github.com/oracle/oci-php-sdk）添加OCI Object Storage对象存储支持。
+遵循Xunruicms官方给出的自定义存储类型开发文档和结合OCI Object Storage的接入方式，并按照以下步骤操作进行开发：
+首先，在/dayrui/ThirdParty/Storage目录下创建一个名为Oci的目录和Oci.php（实现存储逻辑的主要程序文件），所有对Xunruicms开的都在此文件夹内以新增应用方式扩展开发OCI Object Storage对象存储，目录结构如下：
+
+└─dayrui
+    └─ThirdParty
+        └─Storage
+            │  Oci.php  --一个适用于Oracle Cloud Infrastructure (OCI) Object Storage的Oci.php
+            │
+            └─Oci
+                │  App.php  --存储类型的基本信息配置文件。
+                │  autoload.php  -自动加载文件，自动加载SDK类
+                │  Config.html  -实现存储逻辑的主要程序文件。
+                │
+                └─src
+                    └─Oci   ---oci-sdk-php文件夹
+                        ├─Common
+                        │  │  AbstractClient.php
+                        │  │  ConfigFile.php
+                        │  │  Constants.php
+                        │  │  HttpUtils.php
+                        │  │  Iterator.php
+                        │  │  OciException.php
+                        │  │  OciResponse.php
+                        │  │  Range.php
+                        │  │  Regions.php
+                        │  │  SigningStrategy.php
+                        │  │  StringUtils.php
+                        │  │  UserAgent.php
+                        │  │  Utils.php
+                        │  │  Version.php
+                        │  │
+                        │  ├─Auth
+                        │  │      AuthProviderInterface.php
+                        │  │      CachingRequestingAuthProvider.php
+                        │  │      FederationClient.php
+                        │  │      InstancePrincipalsAuthProvider.php
+                        │  │      SecurityTokenAdapter.php
+                        │  │      X509CertificateSuppliers.php
+                        │  │
+                        │  └─Logging
+                        │          LogAdapterInterface.php
+                        │
+                        └─ObjectStorage
+                            │  ObjectStorageAsyncClient.php
+                            │  ObjectStorageClient.php
+                            │  ObjectStorageHelper.php
+                            │  ObjectStorageIterators.php
+                            │
+                            ├─StreamWrapper
+                            │      AbstractHttpStream.php
+                            │      AbstractStream.php
+                            │      FileStream.php
+                            │      GetObjectStream.php
+                            │      HasFileHandle.php
+                            │      HttpStream.php
+                            │      ParHttpStream.php
+                            │      PutObjectUploader.php
+                            │      StreamWrapper.php
+                            │      UploaderInterface.php
+                            │      UploadManagerUploader.php
+                            │      WriteStream.php
+                            │
+                            └─Transfer
+                                    AbstractMultipartUploader.php
+                                    AbstractUploader.php
+                                    BulkDeleteManager.php
+                                    MultipartStreamResumeUploader.php
+                                    MultipartStreamUploader.php
+                                    MultipartUploadException.php
+                                    SinglePartUploader.php
+                                    UploadManager.php
+                                    UploadManagerConstants.php
+                                    UploadManagerRequest.php
+
+我已经完成的部分文件代码：
+1、存储类型命名配置
+dayrui/ThirdParty/Storage/Oci/App.php
+完整代码如下：
+<?php
+
+return [
+
+    'id' => 11, // 这里写10以上99以下的id号
+    'name' => '甲骨文云存储', // 这里是存储类型的命名，例如图一的部分
+
+];
+3、参数文件格式
+dayrui/ThirdParty/Storage/Oci/Config.html
+完整代码如下：
+<div class="form-group r11 r">
+    <label class="col-md-2 control-label">区域</label>
+    <div class="col-md-9">
+        <input id="region" name="data[value][11][region]" value="{$data['value']['region']}" class="form-control" type="text" />
+        <span class="help-block"> Oci对象存储的区域标识，例如：us-phoenix-1 </span>
+    </div>
+</div>
+<div class="form-group r11 r">
+    <label class="col-md-2 control-label">命名空间</label>
+    <div class="col-md-9">
+        <input id="namespace" name="data[value][11][namespace]" value="{$data['value']['namespace']}" class="form-control" type="text" />
+        <span class="help-block"> Oci对象存储的命名空间 </span>
+    </div>
+</div>
+<div class="form-group r11 r">
+    <label class="col-md-2 control-label">存储桶名称</label>
+    <div class="col-md-9">
+        <input id="bucketName" name="data[value][11][bucketName]" value="{$data['value']['bucketName']}" class="form-control" type="text" />
+        <span class="help-block"> Oci对象存储的存储桶名称 </span>
+    </div>
+</div>
+<div class="form-group r11 r">
+    <label class="col-md-2 control-label">访问密钥</label>
+    <div class="col-md-9">
+        <input id="accessKey" name="data[value][11][accessKey]" value="{$data['value']['accessKey']}" class="form-control" type="text" />
+        <span class="help-block"> Oci对象存储的访问密钥 </span>
+    </div>
+</div>
+<div class="form-group r11 r">
+    <label class="col-md-2 control-label">秘密密钥</label>
+    <div class="col-md-9">
+        <input id="secretKey" name="data[value][11][secretKey]" value="{$data['value']['secretKey']}" class="form-control" type="text" />
+        <span class="help-block"> Oci对象存储的秘密密钥 </span>
+    </div>
+</div>
+
+接下来我需要你帮我编写下面的文件代码：
+1、自动加载文件：dayrui/ThirdParty/Storage/Oci/autoload.php
+功能：自动加载dayrui/ThirdParty/Storage/Oci/src/下的oci-php-sdk的SDK类
+可以参考的已经完成的七牛云存储：dayrui/ThirdParty/Storage/Qiniu/autoload.php
+
+代码如下：
+<?php
+
+function classLoader($class)
+{
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+    $file = __DIR__ . '/src/' . $path . '.php';
+
+    if (file_exists($file)) {
+        require_once $file;
+    }
+}
+spl_autoload_register('classLoader');
+
+require_once  __DIR__ . '/src/Qiniu/functions.php';
+
+2、Oci存储类文件：dayrui/ThirdParty/Storage/Oci.php
+一个自定义的PHP类文件，旨在将Xunruicms与Oracle Cloud Infrastructure (OCI) Object Storage服务集成。这个文件的主要功能是提供与OCI Object Storage交互的方法，如上传和删除文件。以下是对这个文件功能和集成方式的详细描述：
+
+功能
+配置加载：Oci类的构造函数中加载了与OCI Object Storage相关的配置信息，如区域（region）、命名空间（namespace）、存储桶名称（bucketName）、访问密钥ID（accessKeyId）和秘密访问密钥（secretAccessKey）。这些配置信息通常从Xunruicms的配置系统中动态加载，以便于管理和更新。
+
+文件上传：提供了一个upload方法，用于将本地文件上传到OCI Object Storage。这个方法接受文件路径和对象名称作为参数，执行上传操作，并返回上传结果，包括成功或失败的状态、消息和相关数据（如文件的URL和MD5哈希值）。
+
+文件删除：提供了一个delete方法，用于从OCI Object Storage删除指定的文件。这个方法接受对象名称作为参数，执行删除操作，并处理可能出现的异常。
+
+xunruicms官方给出的存储类开发示例代码：dayrui/ThirdParty/Storage/Test.php
+<?php namespace Phpcmf\ThirdParty\Storage;
+
+// Test 命名文件
+class Test {
+
+    // 存储内容
+    protected $data;
+
+    // 文件存储路径
+    protected $filename;
+
+    // 文件存储目录
+    protected $filepath;
+
+    // 附件存储的信息
+    protected $attachment;
+
+    // 是否进行图片水印
+    protected $watermark;
+
+    // 完整的文件目录
+    protected $fullpath;
+
+    // 完整的文件路径
+    protected $fullname;
+
+
+    // 初始化参数 一般这个函数体是固定的
+    public function init($attachment, $filename) {
+
+        $this->filename = trim($filename, DIRECTORY_SEPARATOR);
+        $this->filepath = dirname($filename);
+        $this->filepath == '.' && $this->filepath = '';
+        $attachment['value']['path'] = rtrim($attachment['value']['path'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        $this->attachment = $attachment;
+        $this->fullpath = $this->attachment['value']['path'].$this->filepath;
+        $this->fullname = $this->attachment['value']['path'].$this->filename;
+
+        return $this;
+    }
+
+    // 文件上传模式
+    public function upload($type = 0, $data, $watermark) {
+
+        $this->data = $data; //
+        $this->watermark = $watermark; // 是否水印变量
+
+        // 本地临时文件
+        $locpath = WRITEPATH.'attach/'.md5($this->fullname);
+
+        // 存储文件 移动上传或者内容存储
+        if ($type) {
+            // 移动失败
+            if (!(move_uploaded_file($this->data, $locpath) || !is_file($locpath))) {
+                return dr_return_data(0, dr_lang('文件移动失败'));
+            }
+        } else {
+            $filesize = file_put_contents($locpath, $this->data);
+            if (!$filesize || !is_file($locpath)) {
+                return dr_return_data(0, dr_lang('文件创建失败'));
+            }
+        }
+
+        // 强制水印
+        if ($this->watermark) {
+            $config = \Phpcmf\Service::C()->get_cache('site', SITE_ID, 'watermark');
+            $config['source_image'] = $locpath;
+            $config['dynamic_output'] = false;
+            \Phpcmf\Service::L('Image')->watermark($config);
+        }
+        $md5 = md5_file($locpath);
+
+        // $this->filename 这个是文件存储的相对路径
+
+        /*
+        这里写你的上传到文件服务器代码
+        $locpath 本地文件
+        $this->attachment 服务器配置信息
+
+        如果遇到错误的返回格式：
+        return dr_return_data(0, '错误信息');
+        */
+
+
+        // 上传成功的返回
+        return dr_return_data(1, 'ok', [
+            'url' => $this->attachment['url'].$this->filename,
+            'md5' => $md5,
+        ]);
+    }
+
+    // 删除文件
+    public function delete() {
+        // 这里写删除文件的方法
+    }
+
+
+}
+
+
+
+下面是七牛云的存储类文件参考文件：dayrui/ThirdParty/Storage/Qiniu.php
+代码：
+<?php namespace Phpcmf\ThirdParty\Storage;
+
+require_once __DIR__ . '/Qiniu/autoload.php';
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
+
+// qiniu存储
+class Qiniu {
+
+    // 存储内容
+    protected $data;
+
+    // 文件存储路径
+    protected $filename;
+
+    // 文件存储目录
+    protected $filepath;
+
+    // 附件存储的信息
+    protected $attachment;
+
+    // 是否进行图片水印
+    protected $watermark;
+
+    private $accessKey;
+    private $secretKey;
+
+    // 初始化参数
+    public function init($attachment, $filename) {
+
+        $this->filename = trim($filename, DIRECTORY_SEPARATOR);
+        $this->filepath = dirname($filename);
+        $this->filepath == '.' && $this->filepath = '';
+        $this->attachment = $attachment;
+
+
+        $this->accessKey = $this->attachment['value']['AK'];
+        $this->secretKey = $this->attachment['value']['SK'];
+
+        return $this;
+    }
+
+    // 文件上传模式
+    public function upload($type, $data, $watermark) {
+
+        $this->data = $data;
+        $this->watermark = $watermark;
+
+        // 本地临时文件
+        $filePath = WRITEPATH.'attach/'.SYS_TIME.'-'.str_replace([DIRECTORY_SEPARATOR, '/'], '-', $this->filename);
+        $storage = new \Phpcmf\Library\Storage();
+        $rt = $storage->uploadfile($type, $this->data, $filePath, $watermark, $this->attachment);
+        if (!$rt['code']) {
+            return $rt;
+        }
+
+        // 要上传的空间
+        $bucket = $this->attachment['value']['bucket'];
+
+		// 初始化Auth状态
+		$auth = new Auth($this->accessKey, $this->secretKey);
+
+		// 生成上传 Token
+		$token = $auth->uploadToken($bucket);
+		// 初始化 UploadManager 对象并进行文件的上传。
+		$uploadMgr = new UploadManager();
+		// 调用 UploadManager 的 putFile 方法进行文件的上传。
+		list($ret, $err) = $uploadMgr->putFile($token, $this->filename, $filePath);
+		if ($err !== null) {
+			return dr_return_data(0, 'Error: '.var_export($err, true));
+		}
+
+		$md5 = md5_file($filePath);
+        @unlink($filePath);
+
+        // 上传成功
+        return dr_return_data(1, 'ok', [
+            'url' => $this->attachment['url'].$this->filename,
+            'md5' => $md5,
+            'size' => $rt['msg'],
+            'info' => $rt['data']
+        ]);
+    }
+
+    // 删除文件
+    public function delete() {
+
+        $key = $this->filename;
+        $bucket = $this->attachment['value']['bucket'];
+
+        $auth = new Auth($this->accessKey, $this->secretKey);
+        $config = new \Qiniu\Config();
+        $bucketManager = new \Qiniu\Storage\BucketManager($auth, $config);
+        $bucketManager->delete($bucket, $key);
+
+        return;
+    }
+
+}
+oci-php-sdk文件：
+dayrui/ThirdParty/Storage/Oci/src下已经放置oci-php-sdk文件，请看我上面的目录树结构
+dayrui/ThirdParty/Storage/Oci/src/Oci/Common
+dayrui/ThirdParty/Storage/Oci/src/Oci/ObjectStorage
+
+
+项目中的Oss.php和Qiniu.php文件，这些文件位于dayrui/ThirdParty/Storage目录下。这些文件为阿里云OSS和七牛云存储提供了集成示例。以下是它们的基本结构和实现逻辑，您可以参考这些来开发OCI Object Storage的集成。
+
+阿里云OSS (Oss.php)
+初始化参数，包括存储路径、文件名、附件信息等。
+使用阿里云OSS PHP SDK进行文件上传和删除。
+需要配置的参数包括accessKeyId、accessKeySecret和endpoint。
+查看Oss.php代码
+
+七牛云存储 (Qiniu.php)
+初始化参数，类似于OSS的实现。
+使用七牛云存储的PHP SDK进行文件上传和删除。
+需要配置的参数包括AK（Access Key）和SK（Secret Key）。
+查看Qiniu.php代码
+
+开发OCI Object Storage集成
+根据上述文件的结构，您可以按照以下步骤开发OCI Object Storage的集成：
+
+配置文件 (Config.html): 定义用户在Xunruicms后台配置OCI Object Storage时需要填写的字段，包括区域（Region）、命名空间（Namespace）、存储桶名称（Bucket Name）、访问密钥（Access Key）和秘密密钥（Secret Key）。
+
+存储类 (Oci.php): 实现一个类似于Oss.php和Qiniu.php的文件，用于处理OCI Object Storage的文件上传和删除逻辑。您需要使用OCI Object Storage提供的API或SDK来实现这些功能。类中应包含初始化参数、上传和删除方法。
+
+集成SDK: 如果OCI Object Storage提供了PHP SDK，您应该在Oci.php中引入并使用它。如果没有直接的SDK，可能需要使用HTTP客户端（如Guzzle）直接调用API。
+
+通过参考Oss.php和Qiniu.php的实现方式，您可以获得如何在Xunruicms项目中集成第三方云存储服务的一般思路。请确保您的Oci.php能够根据Xunruicms后台的配置动态读取OCI Object Storage的参数，并且正确实现文件的上传和删除逻辑。
+

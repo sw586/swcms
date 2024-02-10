@@ -1,24 +1,39 @@
 <?php namespace Phpcmf\ThirdParty\Storage;
 
+require_once __DIR__ . '/Oci/autoload.php';
+
+// 假设 Oracle\Cloud\Infrastructure\ObjectStorage\ObjectStorageClient 是正确的OCI客户端类路径
+use Oracle\Oci\ObjectStorage\ObjectStorageClient;
+
 class Oci {
 
-    protected $config;
+    protected $client;
+    protected $attachment;
 
-    public function __construct($config) {
-        $this->config = $config;
-        // 初始化OCI客户端，可能需要根据实际SDK调整
-    }
+    // 初始化参数
+    public function init($attachment, $filename) {
+        $this->attachment = $attachment;
 
-    public function upload($filename, $filepath, $data) {
-        // 根据OCI PHP SDK实现上传逻辑
-        // 使用$this->config中的配置信息（如区域、命名空间等）
-
-        // 示例返回格式
-        return dr_return_data(1, 'ok', [
-            'url' => '文件URL',
-            'md5' => '文件MD5',
+        // 使用OCI Object Storage客户端初始化逻辑
+        $this->client = new ObjectStorageClient([
+            'region' => $attachment['value']['region'],
+            'namespace' => $attachment['value']['namespace'],
+            'accessKeyId' => $attachment['value']['accessKeyId'],
+            'secretAccessKey' => $attachment['value']['secretAccessKey']
         ]);
+
+        // 其他初始化操作...
     }
 
-    // 其他方法...
+    // 文件上传模式
+    public function upload($type, $data, $watermark) {
+        // 根据OCI Object Storage SDK的具体方法来实现上传逻辑
+    }
+
+    // 删除文件
+    public function delete($filename) {
+        // 根据OCI Object Storage SDK的具体方法来实现删除逻辑
+    }
+
+    // 可以添加更多方法，如列出文件等
 }

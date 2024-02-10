@@ -1,0 +1,231 @@
+卷 软件 的文件夹 PATH 列表
+卷序列号为 893F-E7A2
+D:.
+│  2.txt
+│  
+└─Storage
+    │  Oci.php
+    │  Oss.php
+    │  Qcloud.php
+    │  Qiniu.php
+    │  
+    ├─Oci
+    │  │  2.txt
+    │  │  App.php
+    │  │  autoload.php
+    │  │  Config.html
+    │  │  
+    │  └─src
+    │      └─Oracle
+    │          └─Oci
+    │              ├─Common
+    │              │  │  AbstractClient.php
+    │              │  │  ConfigFile.php
+    │              │  │  Constants.php
+    │              │  │  HttpUtils.php
+    │              │  │  Iterator.php
+    │              │  │  OciException.php
+    │              │  │  OciResponse.php
+    │              │  │  Range.php
+    │              │  │  Regions.php
+    │              │  │  SigningStrategy.php
+    │              │  │  StringUtils.php
+    │              │  │  UserAgent.php
+    │              │  │  Utils.php
+    │              │  │  Version.php
+    │              │  │  
+    │              │  ├─Auth
+    │              │  │      AuthProviderInterface.php
+    │              │  │      CachingRequestingAuthProvider.php
+    │              │  │      FederationClient.php
+    │              │  │      InstancePrincipalsAuthProvider.php
+    │              │  │      SecurityTokenAdapter.php
+    │              │  │      X509CertificateSuppliers.php
+    │              │  │      
+    │              │  └─Logging
+    │              │          LogAdapterInterface.php
+    │              │          
+    │              └─ObjectStorage
+    │                  │  ObjectStorageAsyncClient.php
+    │                  │  ObjectStorageClient.php
+    │                  │  ObjectStorageHelper.php
+    │                  │  ObjectStorageIterators.php
+    │                  │  
+    │                  ├─StreamWrapper
+    │                  │      AbstractHttpStream.php
+    │                  │      AbstractStream.php
+    │                  │      FileStream.php
+    │                  │      GetObjectStream.php
+    │                  │      HasFileHandle.php
+    │                  │      HttpStream.php
+    │                  │      ParHttpStream.php
+    │                  │      PutObjectUploader.php
+    │                  │      StreamWrapper.php
+    │                  │      UploaderInterface.php
+    │                  │      UploadManagerUploader.php
+    │                  │      WriteStream.php
+    │                  │      
+    │                  └─Transfer
+    │                          AbstractMultipartUploader.php
+    │                          AbstractUploader.php
+    │                          BulkDeleteManager.php
+    │                          MultipartStreamResumeUploader.php
+    │                          MultipartStreamUploader.php
+    │                          MultipartUploadException.php
+    │                          SinglePartUploader.php
+    │                          UploadManager.php
+    │                          UploadManagerConstants.php
+    │                          UploadManagerRequest.php
+    │                          
+    ├─Oss
+    │  │  App.php
+    │  │  autoload.php
+    │  │  Config.html
+    │  │  
+    │  └─src
+    │      └─OSS
+    │          │  OssClient.php
+    │          │  
+    │          ├─Core
+    │          │      MimeTypes.php
+    │          │      OssException.php
+    │          │      OssUtil.php
+    │          │      
+    │          ├─Http
+    │          │      LICENSE
+    │          │      RequestCore.php
+    │          │      RequestCore_Exception.php
+    │          │      ResponseCore.php
+    │          │      
+    │          ├─Model
+    │          │      BucketInfo.php
+    │          │      BucketListInfo.php
+    │          │      BucketStat.php
+    │          │      CnameConfig.php
+    │          │      CorsConfig.php
+    │          │      CorsRule.php
+    │          │      DeletedObjectInfo.php
+    │          │      DeleteMarkerInfo.php
+    │          │      DeleteObjectInfo.php
+    │          │      ExtendWormConfig.php
+    │          │      GetLiveChannelHistory.php
+    │          │      GetLiveChannelInfo.php
+    │          │      GetLiveChannelStatus.php
+    │          │      InitiateWormConfig.php
+    │          │      LifecycleAction.php
+    │          │      LifecycleConfig.php
+    │          │      LifecycleRule.php
+    │          │      ListMultipartUploadInfo.php
+    │          │      ListPartsInfo.php
+    │          │      LiveChannelConfig.php
+    │          │      LiveChannelHistory.php
+    │          │      LiveChannelInfo.php
+    │          │      LiveChannelListInfo.php
+    │          │      LoggingConfig.php
+    │          │      ObjectInfo.php
+    │          │      ObjectListInfo.php
+    │          │      ObjectVersionInfo.php
+    │          │      ObjectVersionListInfo.php
+    │          │      PartInfo.php
+    │          │      PrefixInfo.php
+    │          │      RefererConfig.php
+    │          │      RequestPaymentConfig.php
+    │          │      RestoreConfig.php
+    │          │      ServerSideEncryptionConfig.php
+    │          │      StorageCapacityConfig.php
+    │          │      Tag.php
+    │          │      TaggingConfig.php
+    │          │      UploadInfo.php
+    │          │      VersioningConfig.php
+    │          │      WebsiteConfig.php
+    │          │      WormConfig.php
+    │          │      XmlConfig.php
+    │          │      
+    │          └─Result
+    │                  AclResult.php
+    │                  AppendResult.php
+    │                  BodyResult.php
+    │                  CallbackResult.php
+    │                  CopyObjectResult.php
+    │                  DeleteObjectsResult.php
+    │                  DeleteObjectVersionsResult.php
+    │                  ExistResult.php
+    │                  GetBucketEncryptionResult.php
+    │                  GetBucketInfoResult.php
+    │                  GetBucketRequestPaymentResult.php
+    │                  GetBucketStatResult.php
+    │                  GetBucketTagsResult.php
+    │                  GetBucketVersioningResult.php
+    │                  GetBucketWormResult.php
+    │                  GetCnameResult.php
+    │                  GetCorsResult.php
+    │                  GetLifecycleResult.php
+    │                  GetLiveChannelHistoryResult.php
+    │                  GetLiveChannelInfoResult.php
+    │                  GetLiveChannelStatusResult.php
+    │                  GetLocationResult.php
+    │                  GetLoggingResult.php
+    │                  GetRefererResult.php
+    │                  GetStorageCapacityResult.php
+    │                  GetWebsiteResult.php
+    │                  HeaderResult.php
+    │                  InitiateBucketWormResult.php
+    │                  InitiateMultipartUploadResult.php
+    │                  ListBucketsResult.php
+    │                  ListLiveChannelResult.php
+    │                  ListMultipartUploadResult.php
+    │                  ListObjectsResult.php
+    │                  ListObjectVersionsResult.php
+    │                  ListPartsResult.php
+    │                  PutLiveChannelResult.php
+    │                  PutSetDeleteResult.php
+    │                  Result.php
+    │                  SymlinkResult.php
+    │                  UploadPartResult.php
+    │                  
+    ├─Qcloud
+    │      App.php
+    │      Config.html
+    │      cos.phar
+    │      
+    └─Qiniu
+        │  App.php
+        │  autoload.php
+        │  Config.html
+        │  
+        └─src
+            └─Qiniu
+                │  Auth.php
+                │  Config.php
+                │  Etag.php
+                │  functions.php
+                │  Region.php
+                │  Zone.php
+                │  
+                ├─Cdn
+                │      CdnManager.php
+                │      
+                ├─Http
+                │      Client.php
+                │      Error.php
+                │      Request.php
+                │      Response.php
+                │      
+                ├─Processing
+                │      ImageUrlBuilder.php
+                │      Operation.php
+                │      PersistentFop.php
+                │      
+                ├─Rtc
+                │      AppClient.php
+                │      
+                ├─Sms
+                │      Sms.php
+                │      
+                └─Storage
+                        ArgusManager.php
+                        BucketManager.php
+                        FormUploader.php
+                        ResumeUploader.php
+                        UploadManager.php
+                        
